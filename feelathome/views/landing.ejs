@@ -201,7 +201,23 @@ margin-left:5rem !important;
 
               <h6 value="   <%= post.title %>" name="title" style="font-weight:bold;">
    <%= post.title %>
+
+<% if(userId && post.bookmarked) {%>
+   <i value="<%= userId %>" id="<%= post._id %>" style="position:absolute; cursor:pointer;  right:1.5rem; margin:3px;  color:gold;  "
+
+     class=" bm bookmark<%= post._id %>  fa fa-bookmark"></i>
+<% } %>
+
+<% if(userId && !post.bookmarked) {%>
+
+<i value="<%= userId %>" id="<%= post._id %>" style="position:absolute; cursor:pointer;  right:1.5rem; margin:3px;    "
+
+  class="bm bookmark<%= post._id %>  fa fa-bookmark"></i>
+  <% } %>
+
  </h6>
+
+
 
               <p name="description">
          <%= post.description %>
@@ -251,7 +267,6 @@ margin-left:5rem !important;
                           <button type="submit" class="btn btn-link   try2" > Add Comment</button>
 
                           <% }else { %>
-                            <button   class="btn btn-link   try2" > Add Comment</button>
 
                             <% } %>
                             </div>

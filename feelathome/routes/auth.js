@@ -61,6 +61,19 @@ else{
   })
 })
 
+router.get("/:id/bookmarks/:postId",(req,res)=>{
+  Post.findById(req.params.postId,(err,post)=>{
+
+    if(err){
+      res.send(err);
+    }
+else{
+  res.json(post)
+}
+  })
+})
+
+
 router.get("/forgot",(req,res)=>{
   res.render("forgotpass",{sent:false})
 })
@@ -295,6 +308,37 @@ router.put("/:id/likes",(req,res)=>{
   Post.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,post)=>{
     if(err){
       res.json(err)
+    }else{
+
+
+
+
+    }
+  })
+})
+
+
+router.put("/:id/bookmarks/:postId",(req,res)=>{
+  Post.findByIdAndUpdate(req.params.postId,req.body,{new:true},(err,post)=>{
+    if(err){
+      res.json(err)
+    }else{
+User.findById(req.params.id,(err,user)=>{
+  console.log(user);
+  console.log(req.body.bookmarked);
+  if(post.bookmarked){
+    user.bookmarkCount=user.bookmarkCount+1;
+
+  }
+  else if(!post.bookmarked){
+    user.bookmarkCount=user.bookmarkCount-1;
+  }
+  user.save()
+
+})
+
+
+
     }
   })
 })

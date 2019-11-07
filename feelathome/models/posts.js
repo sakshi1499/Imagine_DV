@@ -16,7 +16,10 @@ var postsSchema=new mongoose.Schema({
   default:null
 },
 author:String}],
-
+bookmarked:{
+  type:Boolean,
+  default:false
+},
 
 commentCount:{
   type:Number,
