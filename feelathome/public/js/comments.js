@@ -69,14 +69,14 @@ function updatebookmarks(like){
   // console.log(JSON.stringify(like.attr('id')));
   var updateUrl = '/' + like.attr('value')+'/bookmarks/'+ like.attr('id') ;
 
-console.log(updateUrl);
+console.log('localhost:3000'+updateUrl);
   $.ajax({
     method: 'GET',
     url: updateUrl })
   .then(function(data){
     var bookmarked=data.bookmarked
     // console.log(count);
-    var color= !data.bookmarked ?"gold":"black" ;
+    var color= !bookmarked ?"gold":"black" ;
     $('.bookmark' +like.attr('id')).css("color",color)
   var updateData = {bookmarked:!bookmarked }
   $.ajax({
@@ -85,7 +85,7 @@ console.log(updateUrl);
     data: updateData
   })
   .then(function(data){
-    console.log(JSON.stringify(data.bookmarked));
+    // console.log(JSON.stringify(data.bookmarked));
     // $('.likesnumber').text(+count+1)
 
 

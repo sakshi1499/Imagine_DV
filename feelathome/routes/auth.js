@@ -319,11 +319,19 @@ router.put("/:id/likes",(req,res)=>{
 
 
 router.put("/:id/bookmarks/:postId",(req,res)=>{
-  Post.findByIdAndUpdate(req.params.postId,req.body,{new:true},(err,post)=>{
+  User.findById(req.params.id,(err,user)=>{
     if(err){
       res.json(err)
     }else{
-User.findById(req.params.id,(err,user)=>{
+
+  Post.findByIdAndUpdate(req.params.postId,req.body,{new:true},(err,post)=>{
+if(post.bookmarked){
+  post.bookmarkedUsers.push(user.username)
+  post.save()  
+}
+
+
+
   console.log(user);
   console.log(req.body.bookmarked);
   if(post.bookmarked){

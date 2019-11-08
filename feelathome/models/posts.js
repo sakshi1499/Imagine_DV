@@ -1,68 +1,69 @@
+
 const mongoose=require('mongoose')
 const moment=require('moment')
 
 var postsSchema=new mongoose.Schema({
-  author:{
-    id:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref:"User"
-    },
-    username:String
+author:{
+  id:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"User"
   },
+  username:String
+},
 
-  comments:[{
-    comment:{
-  type: String,
-  default:null
+comments:[{
+  comment:{
+type: String,
+default:null
 },
 author:String}],
 bookmarked:{
-  type:Boolean,
-  default:false
+type:Boolean,
+default:false
 },
-
+bookmarkedUsers:[String],
 commentCount:{
-  type:Number,
-  default:0
+type:Number,
+default:0
 },
 likesCount:{
-  type:Number,
-  default:0
+type:Number,
+default:0
 },
 
 
-  authorId:String,
+authorId:String,
 
-  createdBy:String,
+createdBy:String,
 
-  postIcon:{
-    type:String,
-  default:'default.jpg'},
+postIcon:{
+  type:String,
+default:'default.jpg'},
 
-  postIconUrl:{
-    type:String  },
+postIconUrl:{
+  type:String  },
 
-  image:String,
+image:String,
 
-  title:String,
+title:String,
 
-  description:String
-  ,
-  time:String
+description:String
+,
+time:String
 },
 {timestamps:true}
 
 )
 postsSchema.pre("save", async function(next) {
-  try {
+try {
 
-    let  createdAt= await moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')
-    this.time =createdAt ;
-    console.log(createdAt);
-    return next();
-  } catch (err) {
-    return next(err);
-  }
+  let  createdAt= await moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')
+  this.time =createdAt ;
+  console.log(createdAt);
+  return next();
+} catch (err) {
+  return next(err);
+}
 });
 var Post=mongoose.model("Post",postsSchema)
 
