@@ -280,9 +280,18 @@ margin-left:5rem !important;
                <img src="https://picsum.photos/id/177/2515/1830" class="round float-left mr-2">
                <a href="#" class="try1">Madeline <small class="text-muted">@madeline</small></a></p>
         </div>
+      <%  if(userId) { %>
         <div class="card-footer">
-          <a href="/chat" class="try1">Find more</a>
+          <a href="/<%= userId %>/chat" class="try1">Find more</a>
         </div>
+        <% }else{ %>
+          <div class="card-footer">
+            <a href="/" class="try1">Find more</a>
+          </div>
+        <% } %>
+
+
+
       </div>
       <div class="card shadow">
         <div class="card-body">

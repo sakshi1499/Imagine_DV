@@ -79,7 +79,7 @@ a.navbar-brand:hover {
 }
 
 .navbar-right .search-dashboard > form {
-  background: #f4f4f4 none repeat scroll 0 0;
+  background: #f4f4f4 none repeat  0 0;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   -ms-border-radius: 30px;
@@ -221,7 +221,7 @@ a.navbar-brand:hover {
 .notification-list .dropdown-menu {
  position: absolute;
  top: 7px;
- left: -330px;
+ /* left: -330px; */
  transform: translate3d(50px, 60px, 0px);
  will-change: transform;
   padding: 0px !important;
@@ -284,7 +284,7 @@ a.navbar-brand:hover {
 .notification-list .notify-item .notify-details {
   margin-bottom: 0;
   overflow: hidden;
-  margin-left: 45px;
+  /* margin-left: 45px; */
   text-overflow: ellipsis;
   white-space: nowrap;
   text-transform: none;
@@ -1725,9 +1725,9 @@ a.navbar-brand:hover {
 }
 
 /* ==========================================================================
-   Chat Page
+   chat11 Page
    ========================================================================== */
-.chat{
+.chat1{
   background: #f4f4f4;
   padding: 80px 0px 150px 0px;
 }
@@ -1921,7 +1921,8 @@ a.navbar-brand:hover {
 .conversation-container {
  float: left;
  width: 100%;
- height: 28rem;
+ height: 18rem;
+ overflow-x: auto;
  overflow-y: scroll;
  padding: 20px 0px;
 }
@@ -2089,7 +2090,7 @@ a.navbar-brand:hover {
 }
 
 /* ==========================================================================
-   Media Queries for Chat Page
+   Media Queries for chat11 Page
    ========================================================================== */
 
 /* Desktop */
@@ -2365,4 +2366,9 @@ body{
   border-radius: 50%;
   width:45px;
   height: 45px;
+  }
+
+
+  @media(max-width:810){
+
   }

@@ -86,6 +86,20 @@ router.get("/login",(req,res)=>{
     res.render("chatbox")
 
   })
+
+  router.get("/:id/chat",(req,res)=>{
+    User.findById(req.params.id,(err,found)=>{
+      if(err){
+        res.redirect("back")
+      }else{
+          res.redirect("/chat?username="+found.username+"&room=206")
+      }
+    })
+
+    // res.render("chatbox")
+
+  })
+
   router.get("/events",(req,res)=>{
     res.render("events")
 
@@ -327,7 +341,7 @@ router.put("/:id/bookmarks/:postId",(req,res)=>{
   Post.findByIdAndUpdate(req.params.postId,req.body,{new:true},(err,post)=>{
 if(post.bookmarked){
   post.bookmarkedUsers.push(user.username)
-  post.save()  
+  post.save()
 }
 
 
