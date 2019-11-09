@@ -16,8 +16,8 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous">
   </script>
-<!-- <base href="http://localhost:3000/"/> -->
-<base href="https://doritos.herokuapp.com/"/>
+<base href="http://localhost:3000/"/>
+<!-- <base href="https://doritos.herokuapp.com/"/> -->
 
 <link rel="stylesheet" href="css/styles.css">
 
@@ -156,11 +156,27 @@ margin-left:5rem !important;
               <% if(post.author.id==userId&& userId!=null){ %>
                 <form method="post" action="/<%= userId %>/remove" >
                 <h5><a href="#" class="try1"><%= post.createdBy %> <small class="text-muted"></a>@<%= post.createdBy %></small>
+                <a style="color:#997381 ; position: absolute; right:2rem; top:1.5rem;" class="share-btn share-btn-inverse share-btn-more"
+   href="https://www.addtoany.com/share_save?linkurl=https://doritos.herokuapp.com?title=No More"
+   title="More share options">
+   <i class="fa fa-share-alt" aria-hidden="true"></i>
+
+</a>
+
                 <button type="submit" class="btn btn-link float-right try2"><i class="fas fa-times"></i> </button>
                 </form>
               <% }else { %>
                 <h5><a href="#" class="try1"><%= post.createdBy %> <small class="text-muted"></a>@<%= post.createdBy %></small>
 </h5>
+<a style="color:#997381; position: absolute; right:2rem; top:1.5rem;" class="share-btn share-btn-inverse share-btn-more"
+href="https://www.addtoany.com/share_save?linkurl=https://doritos.herokuapp.com?title=No More"
+title="More share options">
+<i  class="fa fa-share-alt" aria-hidden="true"></i>
+
+
+</a>
+
+
               <% } %>
 <br/>
 <% if(add){ %>
@@ -305,5 +321,7 @@ margin-left:5rem !important;
   </div>
 </div>
   </body>
+  <script type="text/javascript" src="js/share.js"></script>
+
   <script type="text/javascript" src="js/comments.js"></script>
 </html>
