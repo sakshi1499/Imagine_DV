@@ -127,7 +127,6 @@ margin-left:5rem !important;
     <div class="card shadow mb-3">
       <div class="card-body">
         <h5 style="color:#987380; font-weight:bold;" class="navbar-brand">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>
 
         Real Life Stories
 
@@ -145,7 +144,7 @@ margin-left:5rem !important;
 
 
 
-    <div class="col-md-3 mb-3 order-1" style="position:absolute; top:720px; left:3px;">
+    <div class="col-md-3 mb-3 order-1" style="position:absolute; margin-top:10px; top:720px; left:3px;">
       <div class="card shadow mb-3">
         <div class="card-body">
           <h5 style="color:#987380; font-weight:bold;" class="navbar-brand">
@@ -258,6 +257,12 @@ title="More share options">
               <img src="<%=post.image %>" class="card-img" style="max-height:30rem; ">
               <h6 value="   <%= post.title %>" name="title" style="font-weight:bold;">
    <%= post.title %>
+
+   <% if(!userId ) {%>
+     <i  style="position:absolute; cursor:pointer;  right:1.5rem; margin:3px;    "
+       class="  fa fa-bookmark"></i>
+
+    <% } %>
 
    <% if(userId && !post.bookmarked) {%>
    <i value="<%= userId %>" id="<%= post._id %>" style="position:absolute; cursor:pointer;  right:1.5rem; margin:3px;    "
@@ -398,6 +403,31 @@ title="More share options">
 
 
 
+      </div>
+
+
+
+
+      <div class="card shadow" style="margin-top:15px;">
+        <div class="card-body">
+        <h5 style="color:#987380; font-weight:bold;"  >
+        <i class="fa fa-plus" aria-hidden="true"></i>
+
+      Friend Requests
+        </h5>
+        </div>
+        <div class="card-body">
+
+           <p>
+             <img src="https://picsum.photos/id/1006/3000/2000" class="round float-left mr-2">
+             <a href="#" class="try1">Jane <br />
+             <small  class="text-muted">Connect</small></a></p>
+           <p>
+
+        </div>
+        <div class="card-footer">
+          <a href="/" class="try1">Find more</a>
+        </div>
       </div>
 
 
