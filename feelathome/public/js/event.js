@@ -7,6 +7,8 @@ $(document).ready(function() {
     if($(this).html()==='Locate'){
       e.preventDefault()
       e.stopPropagation()
+    
+
       await updateevent($(this));
     }
 
@@ -18,7 +20,9 @@ $(document).ready(function() {
     if($(this).html()==='Locate'){
       e.preventDefault()
       e.stopPropagation()
+
       await updateevent($(this));
+
     }
 
 
@@ -40,6 +44,11 @@ $(document).ready(function() {
 });
 
 function updateevent(like){
+
+
+
+
+
 
 
   var updateUrl = '/events/' + like.attr('value');

@@ -16,8 +16,8 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous">
   </script>
-<base href="http://localhost:3000/"/>
-<!-- <base href="https://doritos.herokuapp.com/"/> -->
+<!-- <base href="http://localhost:3000/"/> -->
+<base href="https://doritos.herokuapp.com/"/>
 
 <link rel="stylesheet" href="css/styles.css">
 
@@ -26,8 +26,8 @@
 <style media="screen">
   @media(min-width:1370px){
 .post{
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 12rem;
+  margin-right: 12rem;
 }
 @media(max-width:768px){
 .post{
@@ -95,21 +95,89 @@ margin-left:5rem !important;
     <% } %>
   </nav>
 </div>
+
+
+
 <div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-md-3 mb-3 order-1">
+  <div class="col-md-3 mb-3 order-1" >
+    <div class="card shadow mb-3">
+      <div class="card-body">
+        <h5 style="color:#987380; font-weight:bold;">
+
+        <i style="color:#987380; ;" class="fa fa-map-marker" aria-hidden="true"></i>
+
+        What's hot
+
+
+        </h5>
+        <p  > <br><a href="/events" ><small class="text-muted">Art</small></a></p>
+        <p><br><a href="/events" ><small class="text-muted">Marathon</small></a></p>
+        <p><br><a href="/events" ><small class="text-muted">Cooking</small></a></p>
+      </div>
+      <div class="card-footer">
+        <a href="/events" class="try1">Find more</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-md-3 mb-3 order-1" style="position:absolute; top:430px; left:3px;">
+    <div class="card shadow mb-3">
+      <div class="card-body">
+        <h5 style="color:#987380; font-weight:bold;" class="navbar-brand">
+        <i class="fa fa-info-circle" aria-hidden="true"></i>
+
+        Real Life Stories
+
+        </h5>
+        <p  > <br><a href="https://www.dvrcv.org.au/stories/true-stories/stories-women/janes-story" >Journey to hell and back</a></p>
+        <p  > <br><a href="https://www.dvrcv.org.au/stories/true-stories/stories-women/katherines-story" >How I coped myself.</a></p>
+      </div>
+      <div class="card-footer">
+        <a href="https://www.dvrcv.org.au/stories/true-stories/stories-women-about-abusive-relationships" class="try1">Find more</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+    <div class="col-md-3 mb-3 order-1" style="position:absolute; top:720px; left:3px;">
       <div class="card shadow mb-3">
         <div class="card-body">
-          <h5>What's hot</h5>
-          <p>Events<br><small class="text-muted">987 Posts</small></p>
-          <p>News<br><small class="text-muted">654 Posts</small></p>
-          <p>Groups<br><small class="text-muted">321 Posts</small></p>
+          <h5 style="color:#987380; font-weight:bold;" class="navbar-brand">
+
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+
+Find Friends
+          </h5>
+
+          <p>
+            <img src="https://picsum.photos/id/1013/4256/2832" class="round float-left mr-2">
+            <a href="#" class="try1">Julie <br />
+            <small  class="text-muted">Add Friend</small></a></p>
+          <p>
+          <img src="https://picsum.photos/id/1027/2848/4272" class="round float-left mr-2">
+          <a href="#" class="try1">Eliphia <br />
+          <small  class="text-muted">Add Friend</small></a></p>
+             <p>
+
         </div>
         <div class="card-footer">
-          <a href="/events" class="try1">Find more</a>
+          <a href="https://www.dvrcv.org.au/stories/true-stories/stories-women-about-abusive-relationships" class="try1">Find more</a>
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
     <div class="col-md-6 order-3 order-md-2">
       <div class=" post card shadow mb-3" style="max-width:34rem; ">
         <div class="card-body">
@@ -283,19 +351,41 @@ title="More share options">
     <div class="col-md-3 mb-3 order-2 order-md-3">
       <div class="card shadow mb-3">
         <div class="card-body">
-          <h5>Recommended</h5>
-          <p>
-            <img src="https://picsum.photos/id/104/3840/2160" class="round float-left mr-2">
-            <a href="#" class="try1">Lily <small class="text-muted">@Lily</small></a></p>
-          <hr>
-          <p>
-            <img src="https://picsum.photos/id/1066/2144/1424" class="round float-left mr-2">
-             <a href="#" class="try1">Betty <small class="text-muted">@bettycooper</small></a></p>
-          <hr>
-             <p>
-               <img src="https://picsum.photos/id/177/2515/1830" class="round float-left mr-2">
-               <a href="#" class="try1">Madeline <small class="text-muted">@madeline</small></a></p>
+
+
+
+        <h5 style="color:#987380; font-weight:bold;" class="navbar-brand" >
+        <i class="fa fa-handshake" aria-hidden="true"></i>
+
+        Volunteers
+        </h5>
+        <p>
+          <img src="https://picsum.photos/id/1013/4256/2832" class="round float-left mr-2">
+          <a href="#" class="try1">Julie <br />
+          <small  class="text-muted">Connect</small></a></p>
+        <p>
+        <img src="https://picsum.photos/id/1027/2848/4272" class="round float-left mr-2">
+        <a href="#" class="try1">Eliphia <br />
+        <small  class="text-muted">Connect</small></a></p>
+           <p>
+           <img src="https://picsum.photos/id/1011/5472/3648" class="round float-left mr-2">
+           <a href="#" class="try1">Madeline <br />
+           <small  class="text-muted">Connect</small></a></p>
+
+
+
+
+
+
+
         </div>
+
+
+
+
+
+
+
       <%  if(userId) { %>
         <div class="card-footer">
           <a href="/<%= userId %>/chat" class="try1">Find more</a>
@@ -309,7 +399,41 @@ title="More share options">
 
 
       </div>
-      <div class="card shadow">
+
+
+
+
+
+      <div class="card shadow" style="margin-top:15px;">
+        <div class="card-body">
+        <h5 style="color:#987380; font-weight:bold;"  >
+        <i class="fa fa-users" aria-hidden="true"></i>
+
+      My  Friends
+        </h5>
+        </div>
+        <div class="card-body">
+
+           <p>
+             <img src="https://picsum.photos/id/1013/4256/2832" class="round float-left mr-2">
+             <a href="#" class="try1">Julie <br />
+             <small  class="text-muted">Connect</small></a></p>
+           <p>
+           <img src="https://picsum.photos/id/1027/2848/4272" class="round float-left mr-2">
+           <a href="#" class="try1">Eliphia <br />
+           <small  class="text-muted">Connect</small></a></p>
+              <p>
+        </div>
+        <div class="card-footer">
+          <a href="/" class="try1">Find more</a>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="card shadow" style="margin-top:15px;">
         <div class="card-body">
           &copy; 2019 Dorito
         </div>
@@ -317,9 +441,16 @@ title="More share options">
           Languages <a href="#" class="try1">English (UK)</a> <a href="#" class="try1">English (US)</a> <a href="#" class="try1">English (Aus)</a>
         </div>
       </div>
+
+
+
+
+
     </div>
   </div>
 </div>
+
+
   </body>
   <script type="text/javascript" src="js/share.js"></script>
 
