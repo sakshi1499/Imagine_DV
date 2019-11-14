@@ -49,7 +49,11 @@ title:String,
 
 description:String
 ,
-time:String
+time:String,
+date:{
+  type:Date,
+  default:Date.now
+}
 },
 {timestamps:true}
 

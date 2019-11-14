@@ -7,7 +7,7 @@ $(document).ready(function() {
     if($(this).html()==='Locate'){
       e.preventDefault()
       e.stopPropagation()
-    
+
 
       await updateevent($(this));
     }
@@ -125,6 +125,7 @@ var feature = response.body.features[0];
 
     $('.'+data.category).attr('href','#popup1');
     $('.'+data.category).html('Display');
+$('.googlemapslink').attr('href',`https://www.google.com/maps?q=${data.address}`)
 $('.address').html(data.address)
 $('.name').html(data.name)
 $('.time').html(data.time)

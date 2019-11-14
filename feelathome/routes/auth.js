@@ -4,6 +4,8 @@ const router = express.Router();
 const { signup, signin } = require("../handlers/auth");
 const User=require("../models/User")
 const Post=require("../models/posts")
+const Event=require("../models/events")
+
 const moment=require('moment')
 const {sendConfirmationEmail}=require("../emails/email")
 const bcrypt = require("bcrypt");
@@ -39,7 +41,7 @@ if(image){
 
 
 router.get("/",(req,res)=>{
-  Post.find({},(err,posts)=>{
+  Post.find({}).sort({date:-1}).exec(function(err,posts){
 
     if(err){
       res.send(err);
@@ -100,10 +102,22 @@ router.get("/login",(req,res)=>{
 
   })
 
+  router.get("/events/:id",(req,res)=>{
+  Event.findById(req.params.id,(err,event)=>{
+    if(err){
+      res.redirect("back")
+    }else{
+      // res.render("events",{event:event})
+      res.json(event)
+    }
+  })
+  })
+
   router.get("/events",(req,res)=>{
-    res.render("events")
+    res.render("events",{event:null})
 
   })
+
 
 
 
@@ -113,7 +127,7 @@ router.get("/login",(req,res)=>{
     if(err){
       console.log(err);
     }else{
-      Post.find({},(err,posts)=>{
+      Post.find({}).sort({date:-1}).exec(function(err,posts){
         res.render('landing',{posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:false})
 
       })
@@ -126,7 +140,7 @@ router.get("/login",(req,res)=>{
      if(err){
        console.log(err);
      }else{
-       Post.find({},(err,posts)=>{
+       Post.find({}).sort({date:-1}).exec(function(err,posts){
          res.render('landing',{postID:req.params.commentId,posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:true})
 
        })
@@ -155,6 +169,17 @@ router.get("/login",(req,res)=>{
     res.render("step1",{userId:req.params.id})
   })
 
+
+
+router.post("/events",(req,res)=>{
+  Event.create(req.body,(err,event)=>{
+    if(err){
+      res.send(err)
+    }else{
+      res.json(event)
+    }
+  })
+})
 
 
   router.post("/:id/step1",(req,res)=>{
@@ -188,6 +213,17 @@ User.findByIdAndUpdate(req.params.id,{address:location},(err,found)=>{
 })
 
   })
+
+
+
+
+
+
+
+
+
+
+
   router.post("/signup", signup);
   router.post("/login", signin);
 
@@ -200,6 +236,15 @@ router.get("/:id/newpassword",(req,res)=>{
 })
 
 
+
+router.get('/events',(req,res)=>{
+
+})
+
+
+router.get("/recipe",(req,res)=>{
+        res.render("recipe")
+      })
 
 
 router.post("/:id/newpassword",async (req,res)=>{
@@ -403,9 +448,6 @@ let id =req.params.id;
       })
 
 
-router.get("/recipe",(req,res)=>{
-        res.render("recipe")
-      })
 
 
 

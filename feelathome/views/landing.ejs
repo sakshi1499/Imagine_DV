@@ -100,7 +100,7 @@ margin-left:5rem !important;
 
 <div class="container-fluid mt-3">
   <div class="row">
-  <div class="col-md-3 mb-3 order-1" >
+  <div class="col-md-3 mb-3 order-1"  >
     <div class="card shadow mb-3">
       <div class="card-body">
         <h5 style="color:#987380; font-weight:bold;">
@@ -127,6 +127,9 @@ margin-left:5rem !important;
     <div class="card shadow mb-3">
       <div class="card-body">
         <h5 style="color:#987380; font-weight:bold;" class="navbar-brand">
+
+        <i style="color:#987380; ;" class="fa fa-history" aria-hidden="true"></i>
+
 
         Real Life Stories
 
@@ -223,7 +226,7 @@ Find Friends
               <% if(post.author.id==userId&& userId!=null){ %>
                 <form method="post" action="/<%= userId %>/remove" >
                 <h5><a href="#" class="try1"><%= post.createdBy %> <small class="text-muted"></a>@<%= post.createdBy %></small>
-                <a style="color:#997381 ; position: absolute; right:2rem; top:1.5rem;" class="share-btn share-btn-inverse share-btn-more"
+                <a style="color:#997381 ; position: absolute; right:4rem; top:1.5rem;" class="share-btn share-btn-inverse share-btn-more"
    href="https://www.addtoany.com/share_save?linkurl=https://doritos.herokuapp.com?title=No More"
    title="More share options">
    <i class="fa fa-share-alt" aria-hidden="true"></i>
@@ -326,16 +329,27 @@ title="More share options">
                         </div>
 <div class="container" style="margin:5px; padding:5px;">
 <% post.comments.forEach(comment =>{ %>
-    <h6 style="display: block; padding: 2px;" >
-    <span style="position: absolute; left:15px; padding-right:5px;font-weight:bold;">
-    <%= comment.author %>
-    </span>
-    <span style="position: relative;padding-left: 5rem;"><%= comment.comment %></span>
-   </h6>
-    <br/>
+  <div>
+  <h6 style="display: block; padding: 2px;" >
+  <span style="position: absolute; left:15px; padding-right:5px;font-weight:bold;">
+  <%= comment.author %>
+  </span>
+  <span style="position: relative;padding-left: 5rem;"><%= comment.comment %></span>
+ </h6>
+  <br/>
+  </div>
+
 <%      }) %>
 </div>
-<a href="#" class="more-comments" style="text-align:center;">Show more...</a>
+
+<a href=" # " class="more-comments" style="text-align:center;">
+<%    if(post.comments.length)  { %>
+
+Show more...
+
+<%      } %>
+
+</a>
                                       </div>
       <% }}) %>
       <%# <div style="max-width:34rem; " class=" post card shadow mb-3 my-skeleton-card">
@@ -362,20 +376,14 @@ title="More share options">
         <h5 style="color:#987380; font-weight:bold;" class="navbar-brand" >
         <i class="fa fa-handshake" aria-hidden="true"></i>
 
-        Volunteers
+        Quote of the day
         </h5>
         <p>
-          <img src="https://picsum.photos/id/1013/4256/2832" class="round float-left mr-2">
-          <a href="#" class="try1">Julie <br />
-          <small  class="text-muted">Connect</small></a></p>
+          <a href="" class="try1">
+          "If you want something said, ask a man; if you want something done, ask a woman."
+           <br />
         <p>
-        <img src="https://picsum.photos/id/1027/2848/4272" class="round float-left mr-2">
-        <a href="#" class="try1">Eliphia <br />
-        <small  class="text-muted">Connect</small></a></p>
-           <p>
-           <img src="https://picsum.photos/id/1011/5472/3648" class="round float-left mr-2">
-           <a href="#" class="try1">Madeline <br />
-           <small  class="text-muted">Connect</small></a></p>
+
 
 
 
@@ -391,15 +399,10 @@ title="More share options">
 
 
 
-      <%  if(userId) { %>
         <div class="card-footer">
-          <a href="/<%= userId %>/chat" class="try1">Find more</a>
+          <a href="https://www.harpersbazaar.com/culture/features/a4056/empowering-female-quotes/" class="try1">Find more</a>
         </div>
-        <% }else{ %>
-          <div class="card-footer">
-            <a href="/" class="try1">Find more</a>
-          </div>
-        <% } %>
+
 
 
 
