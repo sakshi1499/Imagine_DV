@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
 
 
@@ -43,15 +39,12 @@ padding: 10px;
 width: 100%;
 min-height: 500px;
 border: 2px #ccc solid;
-overflow-x:hidden;
 color: #fff;
 }
 
 
 
-.input {
-  border:0;
-}
+
 
 .scrollbar
 {
@@ -60,7 +53,6 @@ color: #fff;
   width:100%;
 	background: white;
 	overflow-y: scroll;
-  overflow-x:hidden;
   border-bottom:1px solid  #ccc;
 }
 
@@ -135,30 +127,13 @@ color: #fff;
  <div style="background:white;height:30px; width:100%; color:#997381; ">
 <h6 style=" margin:5px; font-weight:bold;">Users</h6>
 
-<div id="sidebar" class="chat__sidebar">
-
-        </div>
-
-        <script id="sidebar-template" type="text/html">
-          <div id="sidebar" class="">
-
-           </div>
-<div class="scrollbar" id="style-6" style="background:white;height:216px; width:100%; margin-top:20px; color:#997381;">
-  <div class="force-overflow" style=" ">
-
-  {{#users}}
+<div style="background:white;height:216px; width:100%; margin-top:20px; color:#997381;">
 <a style="margin:30px 10px; margin-top:5px; font-weight:bold; color:grey; cursor:pointer">
-{{username}}<br />
+sai <br />
 <hr>
 </a>
-{{/users}}
 
 </div>
-</div>
-</div>
-
-</script>
-
   </div>
 
           </div>
@@ -183,45 +158,11 @@ color: #fff;
 
            <hr>
            </a>
-  <div class="scrollbar" id="style-6" style="height:360px;position:relative; top:-16px; ">
+  <div class="scrollbar" id="style-6" style="height:360px;position:relative; top:-16px;">
 <!-- messages -->
-
 <div class="force-overflow" style="width:100%; position:absolute; left:0px; right:0px; ">
-  <div id="messages" class="chat__messages"></div>
-  <script id="message-template" type="text/html">
-    <p style="color:#997381;font-weight:bold; margin:2px; margin-top:18px; position:relative; left:6px; ">
-    {{username}}
-    </p>
-    <p style="position:relative; left:6px;">{{message}}
-    <span>{{createdAt}}</span>
-    </p>
 
-    <br>
-    <hr />
-
-
-</script>
-
-<script id="location-message-template" type="text/html">
-  <p style="color:#997381;font-weight:bold; margin:2px; margin-top:18px; position:relative; left:6px; ">
-  {{username}}
-  </p>
-
-  <p style="position:relative; left:6px;">
-    <a style="font-weight:bold;" href="{{url}}">My Current Location</a>
-  <span>{{createdAt}}</span>
-  </p>
-  <br>
-  <hr />
-
-  <div id="sidebar" class="chat__sidebar">
-
-          </div>
-      <div id="messages" class="chat__messages"></div>
-
-</script>
-
-
+  hi
 </div>
     </div>
 
@@ -231,10 +172,9 @@ color: #fff;
              <hr>
 
 
-             <div class="chat">
 
-<form id="message-form" style="">
-  <input class="input-field" type="text" name="message" value="" placeholder="Type Something" style="width:70%; position:relative; left:9px; top:-9px; margin:0px; border:0px;">
+<form style="">
+  <input type="text" name="" value="" placeholder="Type Something" style="width:60%; position:relative; left:9px; top:-9px; margin:0px; border:0px;">
 
   <button  class="btn " style="position:relative; top:-9px; color:#997381">
     <a href="#">
@@ -242,7 +182,7 @@ color: #fff;
 </a>
 </button>
 
-<button id="send-location" class="btn " style="position:relative; top:-9px;color:#997381">
+<button  class="btn " style="position:relative; top:-9px;color:#997381">
   <a href="#">
     <i style="color:#997381" class="fas fa-map-marker-alt"></i>
 </a>
@@ -255,7 +195,6 @@ color: #fff;
 
   </form>
 
-</div>
 
 
 
@@ -268,20 +207,19 @@ color: #fff;
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
-    <script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous">
-      </script>
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="js/chat.js" charset="utf-8"></script>
 
-    <script type="text/javascript">
-        $('input').css("outline","none")
-    </script>
+
+
 
   </body>
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
 </html>

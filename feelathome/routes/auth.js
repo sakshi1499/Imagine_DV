@@ -50,6 +50,13 @@ router.get("/",(req,res)=>{
 
   })
 })
+router.get("/simon",(req,res)=>{
+  res.render("simon")
+})
+router.get("/guessthepassword",(req,res)=>{
+  res.render("guessthepassword")
+})
+
 
 router.get("/posts/:id",(req,res)=>{
   Post.findById(req.params.id,(err,post)=>{

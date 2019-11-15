@@ -1,10 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
 
     <title>Feel-At-Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <!-- <base href="https://doritos.herokuapp.com/"/> -->
+ <base href="http://localhost:3000//"/>
+
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <!-- bootstrap js -->
@@ -16,18 +21,20 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous">
   </script>
-<!-- <base href="http://localhost:3000/"/> -->
-<base href="https://doritos.herokuapp.com/"/>
 
-<link rel="stylesheet" href="css/styles.css">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   </head>
 
 <style media="screen">
   @media(min-width:1370px){
 .post{
-  margin-left: 12rem;
-  margin-right: 12rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 @media(max-width:768px){
 .post{
@@ -180,8 +187,55 @@ Find Friends
 
 
 
+
+    <div class="col-md-3 mb-3 order-1" style="position:absolute; margin-top:10px; top:1000px; left:3px;">
+      <div class="card shadow mb-3">
+        <div class="card-body">
+          <h5 style="color:#987380; font-size:1.06rem;font-weight:bold;" class="navbar-brand">
+
+          <i class="fa fa-trophy" aria-hidden="true"></i>
+
+Just play.Have fun
+          </h5>
+          <p style="display:block;">
+            <img src="https://partycity6.scene7.com/is/image/PartyCity/_pdp_sq_?$_1000x1000_$&$product=PartyCity/823945_01" class="round float-left mr-2">
+            <a style="color:#008ddf" href="/simon" class="try1">Play Simon <br />
+            </a></p>
+            <br/>
+
+          <p style="display:block; ">
+          <img src="https://www.sierraexperts.com/documents/2016/10/password-icon.png" class="round float-left mr-2">
+          <a  style="color:#008ddf" href="/guessthepassword" class="try1">Guess the password <br />
+          </a></p>
+             <p>
+
+
+        </div>
+        <div class="card-footer">
+          <a href="https://www.mindgames.com/Puzzle+Games" class="try1">Find more</a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="col-md-6 order-3 order-md-2">
-      <div class=" post card shadow mb-3" style="max-width:34rem; ">
+      <div class=" post card shadow mb-3" style="max-width:34rem; min-width:300px; ">
         <div class="card-body">
         <% if(userId){ %>
           <form method="post" action="/<%= userId %>">
@@ -209,7 +263,7 @@ Find Friends
       </div>
       <% posts.forEach(post=> { %>
         <%if(post.description.length!==0){%>
-      <div  class="post card shadow mb-3" style="max-width:34rem; ">
+      <div  class="post card shadow mb-3" style="max-width:34rem; min-width:400px; ">
         <div class="card-body">
           <div class="d-flex">
         <%  if(post.postIcon=='default.jpg' && post.postIconUrl){ %>
@@ -367,6 +421,8 @@ Show more...
         </div>
       </div> %>
     </div>
+
+
     <div class="col-md-3 mb-3 order-2 order-md-3">
       <div class="card shadow mb-3">
         <div class="card-body">
@@ -376,37 +432,45 @@ Show more...
         <h5 style="color:#987380; font-weight:bold;" class="navbar-brand" >
         <i class="fa fa-handshake" aria-hidden="true"></i>
 
-        Quote of the day
+        Quotes of the day
         </h5>
         <p>
-          <a href="" class="try1">
-          "If you want something said, ask a man; if you want something done, ask a woman."
+          <a href="" class="try1 quote" style="color:grey;font-weight:bold;">
+"Some men see things as they are and say why ... I dream things that never were and say why not."
+</a>
            <br />
         <p>
-
-
-
-
-
-
-
-
         </div>
-
-
-
-
-
-
-
         <div class="card-footer">
           <a href="https://www.harpersbazaar.com/culture/features/a4056/empowering-female-quotes/" class="try1">Find more</a>
         </div>
-
-
-
-
       </div>
+
+
+
+
+            <div class="card shadow" style="margin-top:15px;">
+              <div class="card-body">
+              <h5 style="color:#987380; font-weight:bold; font-size:1.2rem; "  >
+              <i  class="fa fa-smile" aria-hidden="true"></i>
+
+   Live,Laugh,Love
+
+              </h5>
+              </div>
+              <div class="card-body">
+              <p>
+                <a style="color:#9208b1" href="" class="try1 laugh" style="color:grey; font-weight:bold;">
+
+"A good laugh heals a lot of hurts."
+  </a>
+              </div>
+              <div class="card-footer">
+                <a href="https://www.brainyquote.com/topics/laugh-quotes" class="try1">Find more</a>
+              </div>
+            </div>
+
+
 
 
 
@@ -486,6 +550,6 @@ Show more...
 
   </body>
   <script type="text/javascript" src="js/share.js"></script>
-
+  <script type="text/javascript" src="js/quotes.js"></script>
   <script type="text/javascript" src="js/comments.js"></script>
 </html>
