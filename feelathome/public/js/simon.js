@@ -1,4 +1,33 @@
 
+$(document).ready(function() {
+  	if ($("video").prop('muted', false)){
+      $("#mute").css("background-image","url(http://image.flaticon.com/icons/svg/10/10430.svg)");
+    }
+
+  $("#mute").click( function (){
+    if( $("video").prop('muted') ) {
+      $("video").prop('muted', false);
+      $("#mute").css("background-image","url(http://image.flaticon.com/icons/svg/10/10430.svg)");
+    } else {
+      $("video").prop('muted', true);
+      $("#mute").css("background-image","url(http://image.flaticon.com/icons/svg/10/10776.svg)");
+    }
+  });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
@@ -20,7 +49,12 @@ $(".btn").click(function() {
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
 
+if( $("video").prop('muted')===false){
   playSound(userChosenColour);
+
+}
+
+
   animatePress(userChosenColour);
 
   checkAnswer(userClickedPattern.length-1);
@@ -35,7 +69,10 @@ function checkAnswer(currentLevel) {
         }, 1000);
       }
     } else {
+      if( $("video").prop('muted')===false){
+
       playSound("wrong");
+    }
       $("body").addClass("game-over");
       $("#level-title").text("Game Over, Press Any Key to Restart");
 

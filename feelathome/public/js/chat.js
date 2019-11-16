@@ -51,7 +51,6 @@ socket.on('message', (message) => {
 
 socket.on('locationMessage', (message) => {
     console.log(message)
-
     const html = Mustache.render(locationMessageTemplate, {
         username: message.username,
         url: message.url,
@@ -62,9 +61,17 @@ socket.on('locationMessage', (message) => {
 })
 
 socket.on('roomData', ({ room, users }) => {
+  var x=room.split('.')
+  var user2=x[1]
+  var check=true;
+  if(users.length===2){
+    check=false
+  }
     const html = Mustache.render(sidebarTemplate, {
         room,
-        users
+        users,
+        user2,
+        check
     })
     document.querySelector('#sidebar').innerHTML = html
 })
@@ -82,6 +89,7 @@ $messageForm.addEventListener('submit', (e) => {
         $messageFormInput.focus()
 
         if (error) {
+          alert(error)
             return console.log(error)
         }
 
@@ -106,23 +114,6 @@ $sendLocationButton.addEventListener('click', () => {
         })
     })
 })
-
-// socket.on('load old messages',function(docs){
-// for(var i=docs.length-1;i>=0;i--){
-//   displayMsg(docs[i])
-// }
-// })
-//
-// function displayMsg(data){
-//   const html = Mustache.render(messageTemplate, {
-//       username: data.name,
-//       message: data.msg,
-//       createdAt: moment(data.created).format('h:mm a')
-//   })
-//   $messages.insertAdjacentHTML('beforeend', html)
-//   autoscroll()
-// }
-
 
 socket.emit('join', { username, room }, (error) => {
     if (error) {
