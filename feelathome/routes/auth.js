@@ -45,8 +45,15 @@ router.get("/",(req,res)=>{
 
     if(err){
       res.send(err);
+    }else{
+      User.find({},(err,users)=>{
+        if(err){
+          res.redirect("back")
+        }else{
+          res.render('landing',{posts:posts,isLoggedIn:false,username:null,user:null,userId:null,add:false,users:users})
+        }
+      })
     }
-    res.render('landing',{posts:posts,isLoggedIn:false,username:null,user:null,userId:null,add:false})
 
   })
 })
@@ -135,7 +142,9 @@ router.get("/login",(req,res)=>{
       console.log(err);
     }else{
       Post.find({}).sort({date:-1}).exec(function(err,posts){
-        res.render('landing',{posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:false})
+        User.find({},(err,users)=>{
+          res.render('landing',{posts:posts,requests:found.requests,friends:found.friends,users:users,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:false})
+        })
 
       })
     }
@@ -148,7 +157,9 @@ router.get("/login",(req,res)=>{
        console.log(err);
      }else{
        Post.find({}).sort({date:-1}).exec(function(err,posts){
-         res.render('landing',{postID:req.params.commentId,posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:true})
+         User.find({},(err,users)=>{
+           res.render('landing',{postID:req.params.commentId,friends:found.friends,posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:true,users:users})
+         })
 
        })
      }
@@ -161,8 +172,14 @@ router.get("/login",(req,res)=>{
         console.log(err);
         res.redirect("/"+req.params.id)
       }else{
-        console.log(found.username);
-        res.render("profile",{username:found.username,user:found})
+        Post.find({createdBy:found.username},(err,posts)=>{
+          console.log(found.username);
+          Post.find({},(err,postsAll)=>{
+            res.render("profile",{username:found.username,user:found,posts:posts,postsAll:postsAll})
+
+          })
+        })
+
 
       }
 
@@ -317,6 +334,47 @@ User.find({email:req.body.email},async(err,found)=>{
     })
 
   })
+
+
+router.post("/:id/removeRequest",(req,res)=>{
+  User.findById(req.params.id,(err,user)=>{
+    var request=user.requests.filter(x=>x!==req.body.username)
+    User.findByIdAndUpdate(req.params.id,{requests:request},(err,x)=>{
+      res.json(request)
+    })
+  })
+})
+
+
+  router.post("/:id/addfriend",(req,res)=>{
+
+    User.findById(req.params.id,  (err,user)=>{
+      if(err){
+        res.redirect("back")
+      }else{
+        var img=user.photo
+        var user1=req.body.username
+var z=true
+        user.friends.forEach(y=>{
+          if(y.username=== req.body.username){
+            z=false;
+          }
+        })
+        if(z){
+          user.friends=[...user.friends,{username:user1,image:img}]
+
+        }
+
+       var friends=user.friends
+       var request=user.requests.filter(x=>x!==req.body.username)
+       User.findByIdAndUpdate(req.params.id,{friends:friends,requests:request},(err,x)=>{
+         res.json(friends)
+       })
+
+      }
+    })
+  })
+
 
   router.post("/:id/comments/:commentId",(req,res)=>{
 

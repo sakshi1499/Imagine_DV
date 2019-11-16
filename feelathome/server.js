@@ -27,6 +27,7 @@ const User=require("./models/User")
 
 const Post=require("./models/posts")
 
+const Event=require("./models/events")
 
 
 
@@ -64,12 +65,12 @@ app.use(errorHandler);
           }
 
           socket.join(user.room)
-
           // socket.broadcast.to(user.room).emit('message', generateMessage('Admin', `${user.username} has joined!`))
           io.to(user.room).emit('roomData', {
               room: user.room,
               users: getUsersInRoom(user.room)
           })
+          console.log(getUsersInRoom(user.room));
 
           callback()
       })

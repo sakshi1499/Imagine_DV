@@ -149,10 +149,18 @@ color: #fff;
   {{#users}}
 <a style="margin:30px 10px; margin-top:5px; font-weight:bold; color:grey; cursor:pointer">
 {{username}}<br />
-<hr>
 </a>
-{{/users}}
+<a href="#" title=""><i class="fas fa-signal" style="margin-left:10px;font-size:13px; color:#997381"></i></a>
 
+<hr>
+{{/users}}
+{{#check}}
+  <a style="margin:30px 10px; margin-top:5px; font-weight:bold; color:grey; cursor:pointer">
+  {{user2}}
+  <br />
+  <hr>
+  </a>
+{{/check}}
 </div>
 </div>
 </div>
@@ -170,14 +178,14 @@ color: #fff;
 
            <div style="background:white;height:480px; width:100%; color:#997381;">
            <a style="margin:30px 10px; margin-top:5px; font-weight:bold; color:grey; cursor:pointer">
-           sai
+           Doritos
             <br />
-            <a href="#" title=""><i class="fas fa-signal" style="margin-left:10px;font-size:13px; color:#997381"></i></a>
+            <a href="#" title=""><i class="fa fa-handshake" area-hidden=true style="margin-left:10px;font-size:13px; color:#997381"></i></a>
 
 
             <button  class="btn pull-right" style="position:absolute;  right:30px;  bottom:530px;">
-              <a href="#">
-                <i style="color:#997381" class="fas fa-trash"></i>
+              <a href="/chat?username=XYZ&room=123456">
+                <i style="color:#997381"  class="fas fa-trash"></i>
             </a>
             </button>
 

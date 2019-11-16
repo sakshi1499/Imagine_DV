@@ -42,10 +42,18 @@ bookmarkCount:{
 photo:{
   type:String,
   default:'default.jpg'
-}
+},
 
+friends:[{
+  username:{
+type: String,
+default:null
+},
+image:String
+}],
 
-
+requests:[String],
+requested:[String]
 },
 {timestamps:true}
 );
