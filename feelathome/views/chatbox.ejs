@@ -146,26 +146,34 @@ color: #fff;
 <div class="scrollbar" id="style-6" style="background:white;height:216px; width:100%; margin-top:20px; color:#997381;">
   <div class="force-overflow" style=" ">
 
+<h6 class="room" style="height:0px;display:none;">{{room}}</h6>
+
   {{#users}}
-<a style="margin:30px 10px; margin-top:5px; font-weight:bold; color:grey; cursor:pointer">
+<a  style="margin:30px 10px; margin-top:5px; font-weight:bold; color:grey; cursor:pointer">
 {{username}}<br />
 </a>
 <a href="#" title=""><i class="fas fa-signal" style="margin-left:10px;font-size:13px; color:#997381"></i></a>
-<a href="#" style="position:absolute;right:54px;">
-  <i style="color:#997381" class="fas fa-plus"></i>
+<a  class="requestuser" href="#" style="position:absolute;right:54px;">
+  <i id="{{username}}" style="color:#997381" class="www"></i>
 
 </a>
-
 <hr>
 {{/users}}
 {{#check}}
   <a style="margin:30px 10px; margin-top:5px; font-weight:bold; color:grey; cursor:pointer">
   {{user2}}
-  <a href="#" style="position:absolute;right:54px;">
-    <i style="color:#997381" class="fas fa-plus"></i>
+  <a class="requestuser" href="#" style="position:absolute;right:54px;">
+
+    <i id="{{user2}}"  style="color:#997381" class="www "></i>
 
   </a>
   <br />
+  <a href="" style="position:relative; left:10px ;top:5px;">
+    <i   style="color:#997381" class="fas fa-user-plus ">
+      <span style="font-family:sans-serif; font-size:12px;">Invite</span>
+    </i>
+  </a>
+
   <hr>
 
   </a>
@@ -297,6 +305,10 @@ color: #fff;
       </script>
       <script src="/socket.io/socket.io.js"></script>
       <script src="js/chat.js" charset="utf-8"></script>
+      <script src="js/sendRequest.js" charset="utf-8"></script>
+      <script src="js/requestaccepted.js" charset="utf-8"></script>
+
+
 
     <script type="text/javascript">
         $('input').css("outline","none")

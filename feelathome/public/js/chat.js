@@ -64,17 +64,82 @@ socket.on('roomData', ({ room, users }) => {
   var x=room.split('.')
   var user2=x[1]
   var check=true;
+  var display=false;
   if(users.length===2){
     check=false
+    display=true
   }
     const html = Mustache.render(sidebarTemplate, {
         room,
         users,
         user2,
-        check
-    })
+        check    })
     document.querySelector('#sidebar').innerHTML = html
+
+
+  var x=$('.room').html().split('.')
+  var currentuser=x[0]
+  var friend=x[1]
+  var data={
+    currentuser:currentuser,
+    friend:friend
+  }
+
+  $.ajax({
+    method:"post",
+    url:"/isfriend",
+    data:data
+  }).then(data=>{
+    // console.log(data);
+    if(data){
+      $(`#${friend}`).attr("class","fas fa-user-friends")
+    }else{
+
+      $(`#${friend}`).attr("class","fas fa-plus")
+
+
+    }
+  })
+
+   $('.requestuser').click(function(e){
+
+     $('.fa-plus').attr("class","fa fa-spinner")
+
+     var y=$('.room').html().split('.')
+
+     var currentuser=y[0]
+     var friend=y[1]
+     var send={
+       currentuser:currentuser,
+       friend:friend
+     }
+
+
+
+
+
+$.ajax({
+  method:"post",
+  url:"/sendRequest",
+  data:send
+}).then(data=>{
+  console.log(data);
+
 })
+
+
+
+
+
+
+
+   })
+
+})
+
+
+
+
 
 $messageForm.addEventListener('submit', (e) => {
     e.preventDefault()

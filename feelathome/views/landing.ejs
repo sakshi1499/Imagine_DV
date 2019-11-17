@@ -92,12 +92,58 @@ margin-left:5rem !important;
 
 
 
+
+
+
+
+
+<% if(isLoggedIn) {%>
+
+<div class="dropdown">
+<a href="#" class="btn btn-default "  id="menu1" data-toggle="dropdown" style="cursor:pointer;  ">
+<i class="far fa-envelope" style="color:#997381;font-size: 20px; display: inline; margin-right:15px;" aria-hidden="true"></i>
+
+<span style="font-size:15px !important; position: relative;top:-10px;">
+1
+</span>
+        </i>
+
+      </a>
+<ul style="padding-left:10px;" class="dropdown-menu" role="menu" aria-labelledby="menu1">
+<li role="presentation"><a style="color:#997381;font-weight: bold; "  role="menuitem" tabindex="-1" href="#">Notifications:</a></li>
+<hr />
+</ul>
+</div>
+<% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <% if(isLoggedIn) {%>
 
       <div class="dropdown">
       <a href="#" class="btn btn-default "  id="menu1" data-toggle="dropdown" style="cursor:pointer; margin-right:10px; ">
-        <i class="far fa-bell" style="color:#997381;font-size: 20px; "></i>
+
+        <i class="far fa-bell" style="color:#997381;font-size: 20px; display: inline;">
+<span style="font-size:15px !important; position: relative;top:-10px;">
+<% if(requests.length){ %>
+  <%= requests.length %>
+<% } %>
+
+</span>
+        </i>
+
       </a>
+
         <ul style="padding-left:10px;" class="dropdown-menu" role="menu" aria-labelledby="menu1">
              <li role="presentation"><a style="color:#997381;font-weight: bold; "  role="menuitem" tabindex="-1" href="#">Friend Requests:</a></li>
              <hr />
@@ -190,7 +236,7 @@ margin-left:5rem !important;
       <div class="card-body">
         <h5 style="color:#987380; font-weight:bold;">
 
-        <i style="color:#987380; ;" class="fa fa-map-marker" aria-hidden="true"></i>
+        <i style="color:#987380; " class="fa fa-map-marker-alt" aria-hidden="true"></i>
 
         What's hot
 
@@ -562,23 +608,27 @@ Show more...
         </h5>
         </div>
         <div class="card-body">
+<% if(friends){ %>
+  <% friends.forEach(friend=>{ %>
+  <% if(friend){ %>
 
-<% friends.forEach(friend=>{ %>
-<% if(friend){ %>
+    <p>
+    <img src="img/<%= friend.image %>" class="round float-left mr-2">
+    <a href="#" class="try1"><%= friend.username %> <br />
+    </a>
+    <a href="/chat?username=<%= username %>&room=<%= username %>.<%= friend.username %>" style="cursor:pointer;" >
+    <small  class="text-muted">Connect</small></p>
+    </a>
+       <p>
 
-  <p>
-  <img src="img/<%= friend.image %>" class="round float-left mr-2">
-  <a href="#" class="try1"><%= friend.username %> <br />
-  </a>
-  <small  class="text-muted">Connect</small></p>
-     <p>
-
-<%  } %>
-
+  <%  } %>
 
 
 
-<% }) %>
+
+  <% }) %>
+<% } %>
+
 
 
 

@@ -13,13 +13,14 @@ removeRequest($(this))
 function addfriend(friend){
   var pal={username:$(friend).attr("id")}
   var url='/'+$('.userId').attr('value')+'/addfriend'
+  var user=$('.userId').attr('value')
 
   $.ajax({
     method:"post",
     data:pal,
     url:url
   }).then(data=>{
-    console.log(data);
+    window.location.href='/'+$('.userId').attr('value')
   })
 }
 

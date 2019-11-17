@@ -57,6 +57,7 @@ router.get("/",(req,res)=>{
 
   })
 })
+
 router.get("/simon",(req,res)=>{
   res.render("simon")
 })
@@ -336,11 +337,74 @@ User.find({email:req.body.email},async(err,found)=>{
   })
 
 
+
+router.post("/sendRequest",(req,res)=>{
+
+User.find({username:req.body.currentuser},(err,user)=>{
+if(err){
+  res.redirect("back")
+}else{
+  var x=false;
+  var curr=req.body.friend
+  var x=user[0].requests.push(req.body.friend)
+
+var id=user[0]._id
+User.findByIdAndUpdate(id,{requests:user[0].requests},(err,found)=>{
+  User.find({username:req.body.friend},(err,usr)=>{
+
+    var k=usr[0].requested.push(user[0].username)
+    User.findByIdAndUpdate(usr[0]._id,{requested:usr[0].requested},(err,l)=>{
+
+      res.json({requests:user[0].requests,requested:usr[0].requested})
+    })
+  })
+})
+}
+})
+
+})
+
+
+
+
+
+
+router.post("/isfriend",(req,res)=>{
+  User.find({username:req.body.currentuser},(err,user)=>{
+    if(err){
+      res.redirect("back")
+    }else{
+      var check=false
+      if(user[0].friends)
+      {
+        user[0].friends.forEach(friend=>{
+          if(req.body.friend===friend.username){
+            check=true
+
+          }
+        })
+
+      }
+        res.json(check)
+    }
+  })
+})
+
+
 router.post("/:id/removeRequest",(req,res)=>{
   User.findById(req.params.id,(err,user)=>{
     var request=user.requests.filter(x=>x!==req.body.username)
     User.findByIdAndUpdate(req.params.id,{requests:request},(err,x)=>{
-      res.json(request)
+      User.find({username:req.body.username},(err,usr)=>{
+        if(usr[0].requested){
+          var requested=usr[0].requested.filter(x=>x!==user.username)
+        }
+            var requested=usr[0].requested
+User.findByIdAndUpdate(usr[0]._id,{requested:requested},(err,o)=>{
+  res.json(request)
+
+})
+      })
     })
   })
 })
@@ -350,25 +414,39 @@ router.post("/:id/removeRequest",(req,res)=>{
 
     User.findById(req.params.id,  (err,user)=>{
       if(err){
-        res.redirect("back")
+res.json(err)
       }else{
         var img=user.photo
         var user1=req.body.username
 var z=true
-        user.friends.forEach(y=>{
-          if(y.username=== req.body.username){
-            z=false;
-          }
-        })
+if(user.friends){
+  user.friends.forEach(y=>{
+    if(y.username=== req.body.username){
+      z=false;
+    }
+  })
+}
+
         if(z){
-          user.friends=[...user.friends,{username:user1,image:img}]
+          var x=user.friends.push({username:req.body.username,image:user.photo})
 
         }
 
        var friends=user.friends
        var request=user.requests.filter(x=>x!==req.body.username)
-       User.findByIdAndUpdate(req.params.id,{friends:friends,requests:request},(err,x)=>{
-         res.json(friends)
+       User.findByIdAndUpdate(req.params.id,{friends:user.friends,requests:request},(err,x)=>{
+         User.find({username:req.body.username},(err,i)=>{
+           if(i[0].friends){
+             i[0].friends=[...i[0].friends,{username:x.username,image:x.photo}]
+           }
+           var requested=i[0].requested.filter(x=>x!=user.username)
+         User.findByIdAndUpdate(i[0]._id,{friends:i[0].friends,requested:requested},(err,j)=>{
+
+           res.json(j)
+
+         })
+
+         })
        })
 
       }
