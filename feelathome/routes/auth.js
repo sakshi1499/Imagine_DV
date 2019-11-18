@@ -366,7 +366,24 @@ User.findByIdAndUpdate(id,{requests:user[0].requests},(err,found)=>{
 
 
 
+router.post("/:id/removenotification",(req,res)=>{
+  User.findById(req.params.id,(err,user)=>{
+user.notifications= user.notifications.filter(x=>x!==req.body.notification)
+// user.save()
+User.findByIdAndUpdate(user._id,{notifications:user.notifications},(err,found)=>{
+  res.json(user.notifications)
+})
+  })
+})
 
+router.post("/notify",(req,res)=>{
+User.find({username:req.body.friend},(err,user)=>{
+  user[0].notifications.push(req.body.currentuser)
+  User.findByIdAndUpdate(user[0]._id,{notifications:user[0].notifications},(err,found)=>{
+    res.json(user[0].notifications)
+  })
+})
+})
 
 
 router.post("/isfriend",(req,res)=>{

@@ -10,9 +10,9 @@ function directtochatroom(users){
 var option=$('#hidden').attr("value")
 var username=$('.users').val()
 
-  var room= `${username}.${option}`
+  var room= `${option}.${username}`
   var x=Math.floor(Math.random()*room.length*1000)
-  var updateUrl = '/chat?username=' + $('.users').val() +'&room='+room ;
+  var updateUrl = '/chat?username=' + option +'&room='+room ;
 
   window.location.href=updateUrl
 }

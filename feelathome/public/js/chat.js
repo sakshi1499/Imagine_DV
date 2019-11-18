@@ -101,7 +101,7 @@ socket.on('roomData', ({ room, users }) => {
     }
   })
 
-   $('.requestuser').click(function(e){
+$('.requestuser').click(function(e){
 
      $('.fa-plus').attr("class","fa fa-spinner")
 
@@ -113,11 +113,6 @@ socket.on('roomData', ({ room, users }) => {
        currentuser:currentuser,
        friend:friend
      }
-
-
-
-
-
 $.ajax({
   method:"post",
   url:"/sendRequest",
@@ -127,13 +122,31 @@ $.ajax({
 
 })
 
-
-
-
-
-
-
    })
+
+
+$('.notify').click(function(e){
+  e.preventDefault()
+  $(this).attr("class","fas fa-thumbs-up")
+$('.notificationmessage').html('Requested')
+var y=$('.room').html().split('.')
+var currentuser=y[0]
+var friend=y[1]
+var send={
+  currentuser:currentuser,
+  friend:friend
+}
+
+$.ajax({
+  method:"post",
+  url:"/notify",
+  data:send
+}).then(data=>{
+  console.log(data);
+})
+})
+
+
 
 })
 
