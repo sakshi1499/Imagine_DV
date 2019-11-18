@@ -40,6 +40,27 @@ if(image){
 
 
 
+router.get("/:name/profile/:currentuser/:room",(req,res)=>{
+  User.find({username:req.params.name},(err,found)=>{
+    if(err){
+      console.log(err);
+      res.redirect("back")
+    }else{
+      Post.find({createdBy:found[0].username},(err,posts)=>{
+        console.log(found[0].username);
+        Post.find({},(err,postsAll)=>{
+          res.render("chatprofile",{username:found[0].username,user:found[0],posts:posts,postsAll:postsAll,currentuser:req.params.currentuser,room:req.params.room})
+
+        })
+      })
+
+
+    }
+
+  })
+})
+
+
 router.get("/",(req,res)=>{
   Post.find({}).sort({date:-1}).exec(function(err,posts){
 
@@ -186,6 +207,16 @@ router.get("/login",(req,res)=>{
 
     })
   })
+
+
+
+
+
+
+
+
+
+
   router.get("/step2/:id",(req,res)=>{
     res.render("step2",{userId:req.params.id})
   })
@@ -387,24 +418,27 @@ User.find({username:req.body.friend},(err,user)=>{
 
 
 router.post("/isfriend",(req,res)=>{
-  User.find({username:req.body.currentuser},(err,user)=>{
-    if(err){
-      res.redirect("back")
-    }else{
-      var check=false
-      if(user[0].friends)
-      {
-        user[0].friends.forEach(friend=>{
-          if(req.body.friend===friend.username){
-            check=true
+  if(req.body.currentuser!=='undefined'){
+    User.find({username:req.body.currentuser},(err,user)=>{
+      if(err){
+        res.redirect("back")
+      }else{
+        var check=false
+        if(user[0].friends)
+        {
+          user[0].friends.forEach(friend=>{
+            if(req.body.friend===friend.username){
+              check=true
 
-          }
-        })
+            }
+          })
 
+        }
+          res.json(check)
       }
-        res.json(check)
-    }
-  })
+    })
+  }
+
 })
 
 
