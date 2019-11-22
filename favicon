@@ -1,0 +1,2 @@
+favicon can be added by placing the following code under tile bar
+    <link class="favic" rel="icon" href="favicon.png" sizes="64x64"/>
