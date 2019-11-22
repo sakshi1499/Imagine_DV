@@ -1,0 +1,24 @@
+landing page post code
+
+<h5><a href="#" class="try1">Julie <small class="text-muted">@julie</small></a></h5>
+              <p>
+                I was in an abusive marriage 8 years ago. I almost lost my life on many occasions, but, I didn’t. Not because HE Spared me, but because I chose to carry on and I chose to leave. It took me 5 years, but I did it.</p>
+                <i class="far fa-laugh-beam try3 "></i>
+                <i class="far fa-heart try4 "></i>
+                <a  class="commentsec try2" href="#">View Comments</a>
+                <i class="fas fa-share"></i>
+                <i class="fas fa-bookmark "></i>
+
+
+css part (styles.css)
+
+.commentsec{
+    margin-left: 150px;
+    margin-right:200px;
+  }
+  .try4:hover{
+    color: red;
+  }
+  .try3:hover{
+    color: orange;
+  }
