@@ -45,8 +45,13 @@ router.get("/recipe",(req,res)=>{
 
 
 
+
+router.get("/:name/groupchat",(req,res)=>{
+        res.render("groupchat",{username:req.params.name})
+      })
+
 router.get("/groupchat",(req,res)=>{
-  res.render("groupchat")
+  res.render("groupchat",{username:null})
 })
 
 router.get("/:currentuser/profile/:name/:room",(req,res)=>{
@@ -58,7 +63,17 @@ router.get("/:currentuser/profile/:name/:room",(req,res)=>{
       Post.find({createdBy:found[0].username},(err,posts)=>{
         console.log(found[0].username);
         Post.find({},(err,postsAll)=>{
-          res.render("chatprofile",{username:found[0].username,user:found[0],posts:posts,postsAll:postsAll,currentuser:req.params.currentuser,room:req.params.room,friend:req.params.currentuser})
+          if(req.params.currentuser!=='undefined'){
+            User.find({username:req.params.currentuser},(err,x)=>{
+              console.log(x[0]._id);
+              res.render("chatprofile",{username:found[0].username,user:found[0],posts:posts,postsAll:postsAll,currentuser:req.params.currentuser,userId:x[0]._id,room:req.params.room,friend:req.params.currentuser})
+
+            })
+          }
+          else{
+            res.render("chatprofile",{username:found[0].username,user:found[0],posts:posts,postsAll:postsAll,currentuser:req.params.currentuser,userId:null,room:req.params.room,friend:req.params.currentuser})
+
+          }
 
         })
       })
@@ -320,6 +335,36 @@ router.post("/events",(req,res)=>{
     }
   })
 })
+
+
+
+
+
+
+
+
+router.post("/:name/locusers",(req,res)=>{
+  User.find({username:req.params.name},(err,found)=>{
+if(err){
+  console.log(err);
+}else{
+  var location=found[0].address;
+  var locusers=[]
+User.find({address:location},(err,users)=>{
+  users.forEach(user=>{
+    locusers.push({username:user.username})
+  })
+  res.json({location:location,locusers:locusers})
+})
+}
+
+  })
+})
+
+
+
+
+
 
 
   router.post("/:id/step1",(req,res)=>{
@@ -602,6 +647,22 @@ User.find({username:req.body.username},(err,i)=>{
 })
 
   })
+
+
+  router.post("/:id/updatenickname",(req,res)=>{
+    User.findByIdAndUpdate(req.params.id,{nickname:req.body.nickname},(err,user)=>{
+      if(err){
+        res.redirect("back")
+      }else{
+        res.json(user.nickname)
+      }
+    })
+  })
+
+
+
+
+
 
 
   router.post("/:id/comments/:commentId",(req,res)=>{
