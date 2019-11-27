@@ -7,8 +7,10 @@
 
     <title>Feel-At-Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
- <!-- <base href="https://doritos.herokuapp.com/"/> -->
- <base href="http://localhost:3000/"/>
+    <link class="favic" rel="icon" href="favicon.png" sizes="64x64"/>
+
+ <base href="https://doritos.herokuapp.com/"/>
+ <!-- <base href="http://localhost:3000/"/> -->
 
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -38,7 +40,15 @@
     <div class="navbar-header" style="display:inline">
     <a class="navbar-brand" href="/recipe" style=" color:#997381;"><i class="fas fa-user-shield"></i>
 </a>
-    <a class="navbar-brand" href="/" style=" color:#997381;  font-weight:bold">Feel-At-Home</a>
+
+<% if(userId) { %>
+  <a class="navbar-brand" href="/<%= userId %>" style=" color:#997381;  font-weight:bold">Feel-At-Home</a>
+
+<% }else{ %>
+  <a class="navbar-brand" href="/" style=" color:#997381;  font-weight:bold">Feel-At-Home</a>
+
+<% } %>
+
 
 
 
@@ -104,7 +114,7 @@
                <%= notify %>
                <br />
                <a id="joinnotifiedroom" href="/<%= userId %>/<%= username %>/<%= notify %>.<%= username %>/chat?username=<%= username %>&room=<%= notify %>.<%= username %>"  class=" btn btn-link  try2 "  style="color:#997381"><i    class="fas fa-check"></i> </a>
-               <a id="removenotifications "   class="   try2 "   style="color:red"><i class="fas fa-times"></i> </a>
+               <a id="removenotifications"  href="/<%= userId %>" class=" btn btn-link  try2 "     style="color:red;cursor:pointer;"><i class="fas fa-times"></i> </a>
                </h6>
              </li>
              <% }) %>
@@ -180,15 +190,7 @@
             <i class="fas fa-user"></i> Profile
           </a>
           <div class="dropdown-divider"></div>
-          <% if(userId) { %>
-          <a class="dropdown-item" href="/<%= userId %>">
-            <i class="fas fa-cog"></i> Settings
-          </a>
-          <% } else{ %>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cog"></i> Settings
-            </a>
-            <% }%>
+
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/">
             <i class="fas fa-sign-out-alt"></i> Log Out
@@ -308,9 +310,9 @@
                 <p>
 
       <%    if(username){ %>
-            <a href="/groupchat?username=<%= username %>&room=groupchat" style="cursor:pointer; color:#212529">
+            <a href="/<%= username %>/groupchat?username=<%= username %>&room=groupchat" style="cursor:pointer; color:#212529">
       <%     } else{ %>
-            <a href="/groupchat?username=newuser&room=groupchat" style="cursor:pointer; color:#212529">
+            <a href="/newuser/groupchat?username=newuser&room=groupchat" style="cursor:pointer; color:#212529">
         <%  } %>
 
                   Groups
@@ -632,9 +634,9 @@
     <% if(user.notifications){ %>
   <% user.notifications.forEach(n=>{ %>
     <% if(n=== friend.username){ %>
-      <a href="/chat?username=<%= username %>&room=<%= friend.username %>.<%= username %>" style="cursor:pointer;" >
+      <!-- <a href="/chat?username=<%= username %>&room=<%= friend.username %>.<%= username %>" style="cursor:pointer;" >
       <small style="color:#987380!important"  class="text-muted">Connect</small></p>
-      </a>
+      </a> -->
       <%  } %>
     <% }) %>
     <% }if(user.notifications.length===0){ %>

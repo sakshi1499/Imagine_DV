@@ -3,14 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>GroupChats</title>
+    <link class="favic" rel="icon" href="favicon.png" sizes="64x64"/>
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <base href="https://doritos.herokuapp.com/"/>
+    <!-- <base href="http://localhost:3000/"/> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- bootstrap js -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Tangerine&display=swap" rel="stylesheet">
+
+
 
     <script
         src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -63,6 +70,11 @@ h1 {
 
 <div class="container-fluid" style="background-color:#f4f4f4; position:absolute; bottom:0px; top:150px; ">
 
+<% if(username){ %>
+  <h1 class="username"  value="<%= username %>" style="display:none">
+<%= username %>
+  </h1>
+<% } %>
 
 
 
@@ -116,10 +128,38 @@ h1 {
 
           <h2 class="room-title" style="background-color:#997381; text-shadow:0 0 8px white">Companions</h2>
           <ul class="users">
+
+<li style="margin-bottom:20px">
+  <a href="https://www.google.com/maps?q=Delhi" style=" font-size:20px; color:white;">
+{{#location}}
+<i class="fas fa-map-marker-alt">
+<h6 style="display:inline; font-weight:bold">
+{{location}}
+</h6>
+</i>
+{{/location}}
+</a>
+
+</li>
+
+{{#locusers}}
+<li>
+  {{username}}
+</li>
+{{/locusers}}
+  </ul>
+
+
+  <ul class="users" style="position: absolute; top:550px;">
+
+    <li style="margin-bottom:10px;font-weight:bold">Online Users</li>
+
               {{#users}}
                   <li>{{username}}</li>
               {{/users}}
-          </ul>
+
+
+</ul>
 
 
 
