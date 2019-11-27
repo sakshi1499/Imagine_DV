@@ -58,7 +58,7 @@ router.get("/:currentuser/profile/:name/:room",(req,res)=>{
       Post.find({createdBy:found[0].username},(err,posts)=>{
         console.log(found[0].username);
         Post.find({},(err,postsAll)=>{
-          res.render("chatprofile",{username:found[0].username,user:found[0],posts:posts,postsAll:postsAll,currentuser:req.params.currentuser,room:req.params.room})
+          res.render("chatprofile",{username:found[0].username,user:found[0],posts:posts,postsAll:postsAll,currentuser:req.params.currentuser,room:req.params.room,friend:req.params.currentuser})
 
         })
       })

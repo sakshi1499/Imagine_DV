@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <base href="https://doritos.herokuapp.com/"/>
-    <!-- <base href="http://localhost:3000/"/> -->
+    <!-- <base href="https://doritos.herokuapp.com/"/> -->
+    <base href="http://localhost:3000/"/>
 
 <link rel="stylesheet" href="css/profile.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -93,7 +93,7 @@
 
 <% if( currentuser!=="undefined" ){ %>
 
-  <a href="/<%= user._id %>/<%= user.username %>/<%=room %>/chat?username=<%= user.username %>&room=<%=room %>" value="/<%= user._id %>/<%= currentuser %>/<%= room %>/chat?username=<%= currentuser %>&room=<%= room %>" id="connect" class="btn btn-primary btn-round btn-lg">
+  <a href="/<%= user._id %>/<%= friend %>/<%=room %>/chat?username=<%= friend %>&room=<%=room %>" value="/<%= user._id %>/<%= currentuser %>/<%= room %>/chat?username=<%= currentuser %>&room=<%= room %>" id="connect" class="btn btn-primary btn-round btn-lg">
 
 
 
