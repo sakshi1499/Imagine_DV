@@ -40,10 +40,23 @@ const autoscroll = () => {
 
 socket.on('message', (message) => {
     console.log(message)
+
+
+    var check=false;
+    var friend=true;
+    if($('#username').attr('value')=== message.username){
+      check=true;
+      friend=false;
+    }
+
+
+
     const html = Mustache.render(messageTemplate, {
         username: message.username,
         message: message.text,
-        createdAt: moment(message.createdAt).format('h:mm a')
+        createdAt: moment(message.createdAt).format('h:mm a'),
+        check:check,
+friend:friend
     })
     $messages.insertAdjacentHTML('beforeend', html)
     autoscroll()
@@ -51,10 +64,22 @@ socket.on('message', (message) => {
 
 socket.on('locationMessage', (message) => {
     console.log(message)
+
+    var check=false;
+    var friend=true;
+    if($('#username').attr('value')=== message.username){
+      check=true;
+      friend=false;
+    }
+
+
+
     const html = Mustache.render(locationMessageTemplate, {
         username: message.username,
         url: message.url,
-        createdAt: moment(message.createdAt).format('h:mm a')
+        createdAt: moment(message.createdAt).format('h:mm a'),
+        check:check,
+friend:friend
     })
     $messages.insertAdjacentHTML('beforeend', html)
     autoscroll()
@@ -100,6 +125,7 @@ socket.on('roomData', ({ room, users }) => {
 
     }
   })
+
 
 $('.requestuser').click(function(e){
 

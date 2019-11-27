@@ -2,7 +2,11 @@
 $(document).ready(function() {
   $(".searchuser1").click(function(e){
     e.preventDefault();
-directtochatroom($(this))
+    if($('.users').val()!=='RandomUser'){
+      directtochatroom($(this))
+
+    }
+
   })
 })
 

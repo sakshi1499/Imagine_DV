@@ -10,7 +10,7 @@ $('.quote').click(function(e){
 })
 
 fun($(this));
-$('.laugh').click(function(e){
+$('.laugh1').click(function(e){
   e.stopPropagation()
   e.preventDefault()
   fun($(this));
@@ -43,9 +43,9 @@ $.ajax({
   dataType:'json',
   success:function(data){
    if(data.type=='single')
-   $('.laugh').html(`"${data.joke}"`)
+   $('.laugh1').html(`"${data.joke}"`)
 else
-    $('.laugh').html(`"${data.setup}"<br/><br/> ${data.delivery}`)
+    $('.laugh1').html(`"${data.setup}"<br/><br/> ${data.delivery}`)
   }
 })
 }

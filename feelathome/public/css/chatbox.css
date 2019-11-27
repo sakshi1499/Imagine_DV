@@ -1,7 +1,4 @@
-
-/* ==========================================================================
-   Navbar Styles
-   ========================================================================== */
+/*
 .navbar.navbar-default {
     margin-bottom: 0;
     border-radius: 0;
@@ -111,9 +108,7 @@ a.navbar-brand:hover {
   cursor: pointer;
 }
 
-/* ==========================================================================
-   Dropdown Menu
-   ========================================================================== */
+
 
 .avatar {
 	width: 32px;
@@ -221,7 +216,6 @@ a.navbar-brand:hover {
 .notification-list .dropdown-menu {
  position: absolute;
  top: 7px;
- /* left: -330px; */
  transform: translate3d(50px, 60px, 0px);
  will-change: transform;
   padding: 0px !important;
@@ -284,7 +278,6 @@ a.navbar-brand:hover {
 .notification-list .notify-item .notify-details {
   margin-bottom: 0;
   overflow: hidden;
-  /* margin-left: 45px; */
   text-overflow: ellipsis;
   white-space: nowrap;
   text-transform: none;
@@ -1309,9 +1302,7 @@ a.navbar-brand:hover {
   font-weight: 700;
 }
 
-/* ==========================================================================
-   Stories Page
-   ========================================================================== */
+
 .stories{
   background: #f4f4f4;
   padding: 40px 0px;
@@ -1335,9 +1326,7 @@ a.navbar-brand:hover {
   text-align: center;
 }
 
-/* ==========================================================================
-   Profile Page
-   ========================================================================== */
+
 .profile{
   background: #f4f4f4;
   padding: 0px 0px;
@@ -1372,9 +1361,6 @@ a.navbar-brand:hover {
 }
 
 
-/* ==========================================================================
-   User Profile
-   ========================================================================== */
 .user-profile{
   background: #f4f4f4;
   padding: 0px 0px 20px 0px;
@@ -1442,9 +1428,7 @@ a.navbar-brand:hover {
 	}
 }
 
-/* ==========================================================================
-   Home Menu
-   ========================================================================== */
+
 
 .home-menu{
     background-color: #f4f4f4;
@@ -1495,9 +1479,6 @@ a.navbar-brand:hover {
   text-decoration: none;
 }
 
-/* ==========================================================================
-   Profile Page Two
-   ========================================================================== */
 .profile-two{
   background: #f4f4f4;
   padding: 0px 0px 20px 0px;
@@ -1591,9 +1572,6 @@ a.navbar-brand:hover {
   height: 289px;
 }
 
-/* ==========================================================================
-   Followers Page
-   ========================================================================== */
 .followers{
   background: #f4f4f4;
   padding: 20px 0px 20px 0px;
@@ -2089,11 +2067,7 @@ a.navbar-brand:hover {
     font-size: 18px;
 }
 
-/* ==========================================================================
-   Media Queries for chat11 Page
-   ========================================================================== */
 
-/* Desktop */
 @media (max-width: 1024px){
 }
 
@@ -2106,7 +2080,6 @@ a.navbar-brand:hover {
 	}
 }
 
-/* Tablets */
 @media (max-width: 800px){
 	.messages-box .col-lg-4{
 	  padding: 0px 40px !important;
@@ -2125,7 +2098,6 @@ a.navbar-brand:hover {
 	}
 }
 
-/* Mobile phones */
 @media (max-width: 600px){
 	.messages-box .col-lg-4{
 	  padding: 0px 40px !important;
@@ -2164,9 +2136,7 @@ a.navbar-brand:hover {
 
 
 
-/* ==========================================================================
-   Notifications Page
-   ========================================================================== */
+
 .notifications{
   background: #f4f4f4;
   padding: 30px 0px 50px 0px;
@@ -2231,9 +2201,6 @@ a.navbar-brand:hover {
 	}
 }
 
-/* ==========================================================================
-   Header Styles
-   ========================================================================== */
 .login {
   background: linear-gradient( rgba(34,34,34,0.7), rgba(34,34,34,0.7) ), url('../../img/bg/10.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -2267,9 +2234,6 @@ a.navbar-brand:hover {
 .banner-content .kafe-btn-mint {
  margin-bottom: 30px;
 }
-/* ==========================================================================
-   Form Styles
-   ========================================================================== */
 
 .form-signin{
   max-width: 380px !important;
@@ -2314,9 +2278,7 @@ a.navbar-brand:hover {
  border-top-right-radius: 0;
 }
 
-/* ==========================================================================
-   Custom Button Styles
-   ========================================================================== */
+
 
 .btn-dark {
  border-radius: 0;
@@ -2371,4 +2333,4 @@ body{
 
   @media(max-width:810){
 
-  }
+  } */

@@ -8,7 +8,14 @@ addfriend($(this))
     e.preventDefault()
 removeRequest($(this))
   })
+
+
+
+
+
 })
+
+
 
 function addfriend(friend){
   var pal={username:$(friend).attr("id")}
