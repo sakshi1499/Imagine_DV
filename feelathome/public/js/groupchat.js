@@ -61,11 +61,48 @@ socket.on('locationMessage', (message) => {
 })
 
 socket.on('roomData', ({ room, users }) => {
+  var name=$('.username').attr("value");
+
+if(name !=='newuser'){
+  $.ajax({
+    method:"post",
+    url: `/${name}/locusers`,
+    data:name
+  }).then(data=>{
+var location=data.location;
+var locusers=data.locusers;
+
+
+
     const html = Mustache.render(sidebarTemplate, {
         room,
-        users
+        users,
+        location,
+        locusers
+
     })
     document.querySelector('#sidebar').innerHTML = html
+
+    })
+}
+else{
+  var location='';
+  var locusers=[];
+      const html = Mustache.render(sidebarTemplate, {
+          room,
+          users,
+          location,
+          locusers
+
+      })
+      document.querySelector('#sidebar').innerHTML = html
+}
+
+
+
+
+
+
 })
 
 $messageForm.addEventListener('submit', (e) => {
@@ -106,21 +143,21 @@ $sendLocationButton.addEventListener('click', () => {
     })
 })
 
-socket.on('load old messages',function(docs){
-for(var i=docs.length-1;i>=0;i--){
-  displayMsg(docs[i])
-}
-})
-
-function displayMsg(data){
-  const html = Mustache.render(messageTemplate, {
-      username: data.name,
-      message: data.msg,
-      createdAt: moment(data.created).format('h:mm a')
-  })
-  $messages.insertAdjacentHTML('beforeend', html)
-  autoscroll()
-}
+// socket.on('load old messages',function(docs){
+// for(var i=docs.length-1;i>=0;i--){
+//   displayMsg(docs[i])
+// }
+// })
+//
+// function displayMsg(data){
+//   const html = Mustache.render(messageTemplate, {
+//       username: data.name,
+//       message: data.msg,
+//       createdAt: moment(data.created).format('h:mm a')
+//   })
+//   $messages.insertAdjacentHTML('beforeend', html)
+//   autoscroll()
+// }
 
 
 socket.emit('join', { username, room }, (error) => {
