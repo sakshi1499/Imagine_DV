@@ -12,6 +12,8 @@ password:{
   type:String,
   required:true
 },
+nickname:String,
+
 email:{
   type:String,
   required:true
@@ -38,7 +40,14 @@ bookmarkCount:{
       type:Number,
     default:0
   },
-
+  likeCount:{
+        type:Number,
+      default:0
+    },
+    laughCount:{
+          type:Number,
+        default:0
+      },
 photo:{
   type:String,
   default:'default.jpg'
@@ -53,7 +62,8 @@ image:String
 }],
 
 requests:[String],
-requested:[String]
+requested:[String],
+notifications:[String]
 },
 {timestamps:true}
 );

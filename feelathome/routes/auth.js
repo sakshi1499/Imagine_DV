@@ -39,8 +39,17 @@ if(image){
 }
 
 
+router.get("/recipe",(req,res)=>{
+        res.render("recipe")
+      })
 
-router.get("/:name/profile/:currentuser/:room",(req,res)=>{
+
+
+router.get("/groupchat",(req,res)=>{
+  res.render("groupchat")
+})
+
+router.get("/:currentuser/profile/:name/:room",(req,res)=>{
   User.find({username:req.params.name},(err,found)=>{
     if(err){
       console.log(err);
@@ -61,6 +70,67 @@ router.get("/:name/profile/:currentuser/:room",(req,res)=>{
 })
 
 
+
+router.get("/chat",(req,res)=>{
+
+
+      res.render("chatbox",{userId:null,username:"xyz",friend:"abc"})
+
+
+
+  // res.render("chatbox")
+
+})
+
+router.get("/:id/:name/:room/chat",(req,res)=>{
+  var r=req.params.room.split('.')
+var f=r[0]
+if(r.includes(f)){
+  f=r[1]
+}
+  User.findById(req.params.id,(err,found)=>{
+    if(err){
+      res.redirect("back")
+    }else{
+
+      res.render("chatbox",{userId:req.params.id,username:req.params.name,friend:f})
+
+    }
+  })
+
+  // res.render("chatbox")
+
+})
+
+
+
+router.get("/:postId/show",(req,res)=>{
+  Post.find({}).sort({date:-1}).exec(function(err,posts){
+
+    if(err){
+      res.send(err);
+    }else{
+      User.find({},(err,users)=>{
+        if(err){
+          res.redirect("back")
+        }else{
+
+        Post.findById(req.params.postId,(err,post)=>{
+
+
+          res.render('landing',{show:true,comments:post.comments,commentsId:req.params.postId,posts:posts,postID:null,userslength:users.length,isLoggedIn:false,username:null,user:null,userId:null,add:true,users:users})
+
+
+        })
+
+
+        }
+      })
+    }
+
+  })
+})
+
 router.get("/",(req,res)=>{
   Post.find({}).sort({date:-1}).exec(function(err,posts){
 
@@ -71,7 +141,7 @@ router.get("/",(req,res)=>{
         if(err){
           res.redirect("back")
         }else{
-          res.render('landing',{posts:posts,isLoggedIn:false,username:null,user:null,userId:null,add:false,users:users})
+          res.render('landing',{show:false,posts:posts,postID:null,userslength:users.length,isLoggedIn:false,username:null,user:null,userId:null,add:true,users:users})
         }
       })
     }
@@ -112,6 +182,31 @@ else{
 })
 
 
+router.get("/:id/likes/:postId",(req,res)=>{
+  Post.findById(req.params.postId,(err,post)=>{
+
+    if(err){
+      res.send(err);
+    }
+else{
+  res.json(post)
+}
+  })
+})
+
+router.get("/:id/laughs/:postId",(req,res)=>{
+  Post.findById(req.params.postId,(err,post)=>{
+
+    if(err){
+      res.send(err);
+    }
+else{
+  res.json(post)
+}
+  })
+})
+
+
 router.get("/forgot",(req,res)=>{
   res.render("forgotpass",{sent:false})
 })
@@ -120,23 +215,12 @@ router.get("/forgot",(req,res)=>{
 router.get("/login",(req,res)=>{
    res.render("login")
   })
-  router.get("/chat",(req,res)=>{
-    res.render("chatbox")
+  // router.get("/chat",(req,res)=>{
+  //   res.render("chatbox",{})
+  //
+  // })
 
-  })
 
-  router.get("/:id/chat",(req,res)=>{
-    User.findById(req.params.id,(err,found)=>{
-      if(err){
-        res.redirect("back")
-      }else{
-          res.redirect("/chat?username="+found.username+"&room=206")
-      }
-    })
-
-    // res.render("chatbox")
-
-  })
 
   router.get("/events/:id",(req,res)=>{
   Event.findById(req.params.id,(err,event)=>{
@@ -165,7 +249,7 @@ router.get("/login",(req,res)=>{
     }else{
       Post.find({}).sort({date:-1}).exec(function(err,posts){
         User.find({},(err,users)=>{
-          res.render('landing',{posts:posts,requests:found.requests,friends:found.friends,users:users,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:false})
+          res.render('landing',{posts:posts,requests:found.requests,friends:found.friends,users:users,username:found.username,userslength:users.length,user:found,isLoggedIn:true,userId:req.params.id,add:false})
         })
 
       })
@@ -180,7 +264,7 @@ router.get("/login",(req,res)=>{
      }else{
        Post.find({}).sort({date:-1}).exec(function(err,posts){
          User.find({},(err,users)=>{
-           res.render('landing',{postID:req.params.commentId,friends:found.friends,posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:true,users:users})
+           res.render('landing',{postID:req.params.commentId,userslength:users.length,friends:found.friends,posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:true,users:users,requests:found.requests})
          })
 
        })
@@ -197,7 +281,7 @@ router.get("/login",(req,res)=>{
         Post.find({createdBy:found.username},(err,posts)=>{
           console.log(found.username);
           Post.find({},(err,postsAll)=>{
-            res.render("profile",{username:found.username,user:found,posts:posts,postsAll:postsAll})
+            res.render("profile",{username:found.username,user:found,posts:posts,postsAll:postsAll,userId:req.params.id})
 
           })
         })
@@ -298,11 +382,6 @@ router.get('/events',(req,res)=>{
 })
 
 
-router.get("/recipe",(req,res)=>{
-        res.render("recipe")
-      })
-
-
 router.post("/:id/newpassword",async (req,res)=>{
   if(req.body.password===req.body.confirm){
     let hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -377,14 +456,14 @@ if(err){
 }else{
   var x=false;
   var curr=req.body.friend
-  var x=user[0].requests.push(req.body.friend)
+  var x=user[0].requested.push(req.body.friend)
 
 var id=user[0]._id
-User.findByIdAndUpdate(id,{requests:user[0].requests},(err,found)=>{
+User.findByIdAndUpdate(id,{requested:user[0].requested},(err,found)=>{
   User.find({username:req.body.friend},(err,usr)=>{
 
-    var k=usr[0].requested.push(user[0].username)
-    User.findByIdAndUpdate(usr[0]._id,{requested:usr[0].requested},(err,l)=>{
+    var k=usr[0].requests.push(user[0].username)
+    User.findByIdAndUpdate(usr[0]._id,{requests:usr[0].requests},(err,l)=>{
 
       res.json({requests:user[0].requests,requested:usr[0].requested})
     })
@@ -434,6 +513,23 @@ router.post("/isfriend",(req,res)=>{
           })
 
         }
+
+User.find({username:req.body.friend},(err,found)=>{
+
+  if(found[0].friends)
+  {
+    found[0].friends.forEach(friend=>{
+      if(req.body.friend===friend.username){
+        check=true
+
+      }
+    })
+
+  }
+})
+
+
+
           res.json(check)
       }
     })
@@ -477,9 +573,10 @@ if(user.friends){
     }
   })
 }
+User.find({username:req.body.username},(err,i)=>{
 
         if(z){
-          var x=user.friends.push({username:req.body.username,image:user.photo})
+          var x=user.friends.push({username:req.body.username,image:i[0].photo})
 
         }
 
@@ -500,8 +597,10 @@ if(user.friends){
          })
        })
 
-      }
-    })
+     })
+  }
+})
+
   })
 
 
@@ -571,6 +670,7 @@ router.put("/:id/likes",(req,res)=>{
 })
 
 
+
 router.put("/:id/bookmarks/:postId",(req,res)=>{
   User.findById(req.params.id,(err,user)=>{
     if(err){
@@ -605,7 +705,79 @@ if(post.bookmarked){
 })
 
 
-router.post("/:id",(req,res)=>{
+
+
+router.put("/:id/likes/:postId",(req,res)=>{
+  User.findById(req.params.id,(err,user)=>{
+    if(err){
+      res.json(err)
+    }else{
+
+  Post.findByIdAndUpdate(req.params.postId,req.body,{new:true},(err,post)=>{
+if(post.liked){
+  post.likedUsers.push(user.username)
+  post.save()
+}
+
+
+
+  console.log(user);
+  console.log(req.body.liked);
+  if(post.liked){
+    user.likeCount=user.likeCount+1;
+
+  }
+  else if(!post.liked){
+    user.likeCount=user.likeCount-1;
+  }
+  user.save()
+
+})
+
+
+
+    }
+  })
+})
+
+router.put("/:id/laughs/:postId",(req,res)=>{
+  User.findById(req.params.id,(err,user)=>{
+    if(err){
+      res.json(err)
+    }else{
+
+  Post.findByIdAndUpdate(req.params.postId,req.body,{new:true},(err,post)=>{
+if(post.laughed){
+  post.laughedUsers.push(user.username)
+  post.save()
+}
+
+
+
+  console.log(user);
+  console.log(req.body.liked);
+  if(post.laughed){
+    user.laughCount=user.laughCount+1;
+
+  }
+  else if(!post.liked){
+    user.laughCount=user.laughCount-1;
+  }
+  user.save()
+
+})
+
+
+
+    }
+  })
+})
+
+
+
+
+
+router.post("/:id",multer(multerConf).single('photo'),(req,res)=>{
 // if(){
 var createdBy=null;
 User.findById(req.params.id,(err,found)=>{
@@ -620,8 +792,14 @@ var author={
 }
 console.log(author);
 let id =req.params.id;
-     if(req.body.post['description'].length!==0){
-      Post.create({...req.body.post,authorId:author.id,author:author,postIcon:found.photo,createdBy:createdBy},(err,post)=>{
+var pic=null
+if(req.file){
+ pic=req.file.filename;
+}else{
+  pic=null
+}
+     {
+      Post.create({description:req.body.description,image:pic,authorId:author.id,author:author,postIcon:found.photo,createdBy:createdBy},(err,post)=>{
         if(err){
           console.log(err);
         }else{

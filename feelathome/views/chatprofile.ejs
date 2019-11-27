@@ -35,7 +35,7 @@
 
 
               <div class="navbar-header pull-right">
-              <a class="navbar-brand" href="/" style=" color:#997381;"><i class="fas fa-backspace"></i>
+              <a class="navbar-brand" href="/recipe"" style=" color:#997381;"><i class="fas fa-backspace"></i>
               </a>
               <a class="navbar-brand" href="/" style=" color:#997381;  font-weight:bold">Go Back</a>
               </div>
@@ -89,7 +89,25 @@
     <div class="section">
       <div class="container">
         <div class="button-container">
-          <a href="/chat?username=RandomUser&room=<%= room %>" value="/chat?username=<%= currentuser %>&room=<%= room %>" id="connect" class="btn btn-primary btn-round btn-lg">
+
+
+<% if( currentuser!=="undefined" ){ %>
+
+  <a href="/<%= user._id %>/<%= user.username %>/<%=room %>/chat?username=<%= user.username %>&room=<%=room %>" value="/<%= user._id %>/<%= currentuser %>/<%= room %>/chat?username=<%= currentuser %>&room=<%= room %>" id="connect" class="btn btn-primary btn-round btn-lg">
+
+
+
+<% }else if(currentuser==="undefined"){ %>
+
+
+  <a href="/chat?username=<%= currentuser %>&room=<%= room %>" value="/<%= user._id %>/<%= currentuser %>/<%= room %>/chat?username=<%= currentuser %>&room=<%= room %>" id="connect" class="btn btn-primary btn-round btn-lg">
+
+<% } %>
+
+
+
+
+
 <i style="color:white;" class="fa fa-comment" area-hidden="true">
   <span style="font-family:sans-serif">
     Connect
