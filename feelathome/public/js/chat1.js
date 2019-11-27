@@ -34,6 +34,7 @@ const autoscroll = () => {
 socket.on('roomData', ({ room, users }) => {
   var x=room.split('.')
 
+
   var check=false;
   var friend=true;
   if($('#username').attr('value')){
@@ -49,6 +50,8 @@ var friends=[]
 
                   var currentuser=$('#username').attr('value')
                   var friend=$('#friend').attr('value')
+
+                  // alert(currentuser)
 
 users.forEach(u=>{
 if(u.username===$('#username').attr('value')){

@@ -15,7 +15,7 @@ $('#joinnotifiedroom').click(function(e){
 })
 
 function removenotification(req){
-  alert('hi')
+  // alert('hi')
   var notification={notification: $('.notification').attr("value")}
 
   var url='/'+$('.userId').attr('value')+'/removenotification'
