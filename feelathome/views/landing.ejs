@@ -113,7 +113,15 @@
              <h6  class="notification" value="<%= notify %>" style="font-weight:bold; color:grey">
                <%= notify %>
                <br />
-               <a id="joinnotifiedroom" href="/<%= userId %>/<%= username %>/<%= notify %>.<%= username %>/chat?username=<%= username %>&room=<%= notify %>.<%= username %>"  class=" btn btn-link  try2 "  style="color:#997381"><i    class="fas fa-check"></i> </a>
+               <% if(notify==='CompanionsChat'){ %>
+                 <a id="joinnotifiedroom" href="/<%= userId %>/friendschat?username=<%= username %>&room=CompanionsChat"  class=" btn btn-link  try2 "  style="color:#997381"><i    class="fas fa-check"></i> </a>
+
+              <% }else{ %>
+                 <a id="joinnotifiedroom" href="/<%= userId %>/<%= username %>/<%= username %>.<%= notify %>/chat?username=<%= username %>&room=<%= username %>.<%= notify %>"  class=" btn btn-link  try2 "  style="color:#997381"><i    class="fas fa-check"></i> </a>
+
+              <% } %>
+
+
                <a id="removenotifications"  href="/<%= userId %>" class=" btn btn-link  try2 "     style="color:red;cursor:pointer;"><i class="fas fa-times"></i> </a>
                </h6>
              </li>

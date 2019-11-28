@@ -57,13 +57,24 @@ router.get("/groupchat",(req,res)=>{
 
 router.get("/:id/friendschat",(req,res)=>{
   User.findById(req.params.id,(err,user)=>{
-    res.render("friendschat",{userId:req.params.id,username:user.username})
+    res.render("friendschat",{userId:req.params.id,username:user.username,image:user.photo})
 
   })
 })
 
 router.get("/:name/myfriends",(req,res)=>{
-  
+  User.find({username:req.params.name},(err,user)=>{
+    res.json({friends:user[0].friends})
+  })
+})
+
+router.get("/:name/getimage",(req,res)=>{
+  if(req.params.name){
+    User.find({username:req.params.name},(err,user)=>{
+      res.json({image:user[0].photo})
+    })
+  }
+
 })
 
 
@@ -553,6 +564,17 @@ User.find({username:req.body.friend},(err,user)=>{
   })
 })
 })
+
+
+router.post("/friendsnotify",(req,res)=>{
+User.find({username:req.body.friend},(err,user)=>{
+  user[0].notifications.push(req.body.currentuser)
+  User.findByIdAndUpdate(user[0]._id,{notifications:user[0].notifications},(err,found)=>{
+    res.json(user[0].notifications)
+  })
+})
+})
+
 
 
 router.post("/isfriend",(req,res)=>{
