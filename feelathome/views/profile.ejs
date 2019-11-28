@@ -111,22 +111,21 @@
 
 
         <div class="button-container">
-<%#
-          <a href="#button" class="btn btn-primary btn-round btn-lg">
+
+          <button   id="coverupload" class=" btn btn-primary btn-round btn-lg">
 
 
-                          <form method="post" action="" enctype="multipart/form-data">
 
 
-                            <i class="fas fa-image"></i>
-
-                                <input class="file-upload" name="cover" id="cover" type="file" accept="image/*"/>
-
-            </form>
+                            <i class=" fas fa-image"></i>
 
 
-          </a>
-          %>
+
+
+          </button>
+          <input style="display:none" class="file-upload" name="cover" id="cover" type="file" accept="image/*"/>
+
+
 
           </div>
 
@@ -232,7 +231,8 @@
      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
      crossorigin="anonymous">
    </script>
-
+   <script type="text/javascript" src="js/coverimage.js">
+   </script>
 <script type="text/javascript" src="js/profile.js">
 
 </script>

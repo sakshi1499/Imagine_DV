@@ -54,6 +54,20 @@ router.get("/groupchat",(req,res)=>{
   res.render("groupchat",{username:null})
 })
 
+
+router.get("/:id/friendschat",(req,res)=>{
+  User.findById(req.params.id,(err,user)=>{
+    res.render("friendschat",{userId:req.params.id,username:user.username})
+
+  })
+})
+
+router.get("/:name/myfriends",(req,res)=>{
+  
+})
+
+
+
 router.get("/:currentuser/profile/:name/:room",(req,res)=>{
   User.find({username:req.params.name},(err,found)=>{
     if(err){
