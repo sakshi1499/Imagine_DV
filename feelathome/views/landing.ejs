@@ -32,6 +32,29 @@
   </head>
 
 <style media="screen">
+.container{
+width:100%;
+}
+.skills{
+  text-align: right;
+  padding-bottom: 10px;
+  color: white;
+}
+.html{
+  width:90%;
+  background-color: #f44336;
+}
+
+.html1{
+  width: 50%;
+  background-color: #F0E68C;
+  }
+.html2{
+  width:20%;
+  background-color: #4CAF50;
+}
+
+
 </style>
   <body>
 <div style="margin-bottom:6rem;" >
@@ -57,6 +80,7 @@
     </ul>
 
 <ul class="navbar-nav mr-auto " style="margin:0 -300px;">
+  <h1 class="hidden" style="display:none" value="<%= userId %>"></h1>
 <div style="color: #2c3e51;  font-family: 'Ubuntu', sans-serif; width:800px; position:absolute; top:7px; margin:auto;" >
   <div class="main">
     <select name="" style="" class="users">
@@ -117,7 +141,7 @@
                  <a id="joinnotifiedroom" href="/<%= userId %>/friendschat?username=<%= username %>&room=CompanionsChat"  class=" btn btn-link  try2 "  style="color:#997381"><i    class="fas fa-check"></i> </a>
 
               <% }else{ %>
-                 <a id="joinnotifiedroom" href="/<%= userId %>/<%= username %>/<%= username %>.<%= notify %>/chat?username=<%= username %>&room=<%= username %>.<%= notify %>"  class=" btn btn-link  try2 "  style="color:#997381"><i    class="fas fa-check"></i> </a>
+                 <a id="joinnotifiedroom" href="/<%= userId %>/<%= username %>/<%= notify %>.<%= username %>/chat?username=<%= username %>&room=<%= notify %>.<%= username %>"  class=" btn btn-link  try2 "  style="color:#997381"><i    class="fas fa-check"></i> </a>
 
               <% } %>
 
@@ -197,6 +221,10 @@
           <a class="dropdown-item" href="/<%= userId %>/profile">
             <i class="fas fa-user"></i> Profile
           </a>
+
+          <a class="dropdown-item" href="/<%= userId%>/help">
+            <i class="fas fa-question-circle"></i> Help
+          </a>
           <div class="dropdown-divider"></div>
 
           <div class="dropdown-divider"></div>
@@ -244,7 +272,7 @@
                 </small></a></h5>
               </div>
               <div class="col-4 text-center">
-                <a href="/<%= userId %>/friendschat?username=<%= user.username %>&room=CompanionsChat" class="text-body" data-toggle="tooltip" data-placement="top" title="Groups">
+                <a href="/<%= userId %>/friendschat?username=<%= user.username %>&room=CompanionsChat" class="text-body" data-toggle="tooltip" data-placement="top" title="Companions">
                   <span class="fa-layers fa-2x">
                     <i class="far fa-comment-dots"></i>
                     <span class="fa-layers-counter bg-primary fa-layers-bottom-right"></span>
@@ -330,6 +358,29 @@
                   <%= userslength %> members
                 </small></p>
 
+                <p>
+<% if(user){ %>
+<% if(user.category==="Volunteer"){ %>
+  <a  href="/<%= userId %>/emergency" style="cursor:pointer; color:#212529">
+      Emergency
+  </a>
+  <br><small class="text-muted">
+    <% var x= 0; %>
+
+    <% posts.forEach(post=>{ %>
+      <% if(post.width>=86){ %>
+      <% x=x+1} %>
+    <% }) %>
+<%= x %>
+
+     Red Alerts
+
+  </small></p>
+<% }} %>
+
+
+
+
 
       </div>
       <div class="card-footer">
@@ -361,6 +412,7 @@
 
     <div class="col-md-6 order-3 order-md-2 ">
       <div class=" post card shadow mb-3" style=" ">
+
         <div class="card-body">
         <% if(userId){ %>
           <form method="post" action="/<%= userId %>" enctype="multipart/form-data">
@@ -399,7 +451,34 @@
 
       <% posts.forEach(post=> { %>
       <div  class=" card shadow mb-3" >
+
+<% if(showwidth && post.createdBy!== username){ %>
+  <div class="container">
+
+<%    if(post.width >= 86){ %>
+      <div class="skills html" style="width:(<%= post.width %>)%"></div>
+<%    }else if(post.width< 86 && post.width >= 50){ %>
+      <div class="skills html1" style="width:(<%= post.width %>)%"></div>
+  <%  }else{ %>
+      <div class="skills html2" style="width:(<%= post.width %>)%"></div>
+
+    <% } %>
+
+
+</div>
+
+<% } %>
+
+
+
+
+
+
         <div class="card-body" style="">
+
+
+
+
           <div class="d-flex">
         <%  if(post.postIcon=='default.jpg' && post.postIconUrl){ %>
           <div class="flex-shrink-1">
@@ -421,7 +500,14 @@
   </small></a></h5>
 <% }else{ %>
   <form method="post" action="/<%= userId %>/remove" >
-    <h5><a href="#" class="try1"><%= post.createdBy %> <small class="text-muted">
+    <% if(userId){ %>
+
+    <h5><a href="/<%= username %>/profile/<%= post.createdBy %>/<%= username %>.<%= post.createdBy %>" class="try1"><%= post.createdBy %> <small class="text-muted">
+      <% }else{ %>
+        <h5><a href="/undefined/profile/<%= post.createdBy %>/undefined.<%= post.createdBy %>" class="try1"><%= post.createdBy %> <small class="text-muted">
+
+      <% } %>
+
       <% if(post.nickname){ %>
       @<%= post.nickname %>
   <% }else{ %>
@@ -591,10 +677,10 @@
   <p>
     <img src="img/<%= user.photo %>" class="round float-left mr-2">
     <% if(userId){ %>
-      <a href="/<%= username %>/profile/<%= user.username %>/<%= user.username %>.<%= username %>" class="try1"><%= user.username %> <small class="text-muted">
+      <a href="/<%= username %>/profile/<%= user.username %>/<%= username %>.<%= user.username %>" class="try1"><%= user.username %> <small class="text-muted">
 
     <% }else{ %>
-      <a href="/undefined/profile/<%= user.username %>/undefined.<%= user.username %>" class="try1"><%= user.username %> <small class="text-muted">
+      <a href="/undefined/profile/<%= username %>/undefined.<%= user.username %>" class="try1"><%= user.username %> <small class="text-muted">
 
   <%  } %>
 
@@ -643,7 +729,7 @@
   <% if(friend){ %>
     <p>
     <img src="img/<%= friend.image %>" class="round float-left mr-2">
-    <a href="/<%= username %>/profile/<%= friend.username %>/<%= friend.username %>.<%= username %>" class="try1"><%= friend.username %> <br />
+    <a href="/<%= username %>/profile/<%= friend.username %>/<%= username %>.<%= friend.username %>" class="try1"><%= friend.username %> <br />
     </a>
           <small  class="text-muted">
     <% if(friend.nickname){ %>
@@ -691,8 +777,19 @@
            <br />
            <a href="#" class="languages try1">English (Aus)</a>
         </div>
+
       </div>
 
+      <div class="card shadow mb" style="margin-top:15px;">
+
+      <div class="card-body">
+  <i class="fas fa-question-circle"></i>
+  <a href="/1234/help"  style="color:grey; cursor:pointer">
+    Help
+  </a>
+
+      </div>
+    </div>
 
 
 
