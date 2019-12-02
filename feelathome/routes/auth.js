@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const app=express()
 const router = express.Router();
@@ -7,12 +8,21 @@ const Post=require("../models/posts")
 const Event=require("../models/events")
 
 const moment=require('moment')
-const {sendConfirmationEmail}=require("../emails/email")
+const {sendConfirmationEmail,sendUserEmail}=require("../emails/email")
 const bcrypt = require("bcrypt");
 const methodOverride=require("method-override")
 app.use(methodOverride("_method"))
 const multer=require("multer")
 var CircularJSON = require('circular-json');
+
+const axios=require('axios')
+
+const key_var = 'TEXT_ANALYTICS_SUBSCRIPTION_KEY';
+
+const subscription_key = process.env[key_var];
+
+
+
 
 
 const multerConf={
@@ -38,6 +48,33 @@ if(image){
   }
 }
 
+// router.get("/help",(req,res)=>{
+//
+//       res.render("video",{userId:'nd',sent:false,name:null,email:null})
+//
+//
+//
+// })
+
+
+router.get("/:id/help",(req,res)=>{
+  User.findById(req.params.id,(err,user)=>{
+    if(err){
+      console.log(req.params.id);
+      var userId='1234'
+      userId=userId.split().length;
+      res.render("video",{userId:userId,sent:false,name:null,email:null})
+    }else{
+      res.render("video",{userId:req.params.id,sent:false,name:user.username,email:user.email})
+
+    }
+  })
+
+})
+
+
+
+
 
 router.get("/recipe",(req,res)=>{
         res.render("recipe")
@@ -47,7 +84,11 @@ router.get("/recipe",(req,res)=>{
 
 
 router.get("/:name/groupchat",(req,res)=>{
-        res.render("groupchat",{username:req.params.name})
+  User.find({username:req.params.name},(err,user)=>{
+    res.render("groupchat",{username:req.params.name,userId:user[0]._id})
+
+
+  })
       })
 
 router.get("/groupchat",(req,res)=>{
@@ -61,6 +102,7 @@ router.get("/:id/friendschat",(req,res)=>{
 
   })
 })
+
 
 router.get("/:name/myfriends",(req,res)=>{
   User.find({username:req.params.name},(err,user)=>{
@@ -158,7 +200,7 @@ router.get("/:postId/show",(req,res)=>{
         Post.findById(req.params.postId,(err,post)=>{
 
 
-          res.render('landing',{show:true,comments:post.comments,commentsId:req.params.postId,posts:posts,postID:null,userslength:users.length,isLoggedIn:false,username:null,user:null,userId:null,add:true,users:users})
+          res.render('landing',{showwidth:false,show:true,comments:post.comments,commentsId:req.params.postId,posts:posts,postID:null,userslength:users.length,isLoggedIn:false,username:null,user:null,userId:null,add:true,users:users})
 
 
         })
@@ -181,13 +223,15 @@ router.get("/",(req,res)=>{
         if(err){
           res.redirect("back")
         }else{
-          res.render('landing',{show:false,posts:posts,postID:null,userslength:users.length,isLoggedIn:false,username:null,user:null,userId:null,add:true,users:users})
+          res.render('landing',{show:false,posts:posts,postID:null,userslength:users.length,isLoggedIn:false,username:null,user:null,showwidth:false,userId:null,add:true,users:users})
         }
       })
     }
 
   })
 })
+
+
 
 router.get("/simon",(req,res)=>{
   res.render("simon")
@@ -274,7 +318,7 @@ router.get("/login",(req,res)=>{
   })
 
   router.get("/events",(req,res)=>{
-    res.render("events",{event:null})
+    res.render("events",{event:null,userId:req.params.id})
 
   })
 
@@ -289,13 +333,30 @@ router.get("/login",(req,res)=>{
     }else{
       Post.find({}).sort({date:-1}).exec(function(err,posts){
         User.find({},(err,users)=>{
-          res.render('landing',{posts:posts,requests:found.requests,friends:found.friends,users:users,username:found.username,userslength:users.length,user:found,isLoggedIn:true,userId:req.params.id,add:false})
+          res.render('landing',{showwidth:false,posts:posts,requests:found.requests,friends:found.friends,users:users,username:found.username,userslength:users.length,user:found,isLoggedIn:true,userId:req.params.id,add:false})
         })
 
       })
     }
   })
   })
+
+
+
+    router.get("/:id/emergency",(req,res)=>{
+     User.findById(req.params.id,(err,found)=>{
+      if(err){
+        console.log(err);
+      }else{
+        Post.find({}).sort({date:-1}).exec(function(err,posts){
+          User.find({},(err,users)=>{
+            res.render('landing',{showwidth:true,posts:posts,requests:found.requests,friends:found.friends,users:users,username:found.username,userslength:users.length,user:found,isLoggedIn:true,userId:req.params.id,add:false})
+          })
+
+        })
+      }
+    })
+    })
 
   router.get("/:id/comments/:commentId",(req,res)=>{
     User.findById(req.params.id,(err,found)=>{
@@ -304,7 +365,7 @@ router.get("/login",(req,res)=>{
      }else{
        Post.find({}).sort({date:-1}).exec(function(err,posts){
          User.find({},(err,users)=>{
-           res.render('landing',{postID:req.params.commentId,userslength:users.length,friends:found.friends,posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:true,users:users,requests:found.requests})
+           res.render('landing',{showwidth:false,postID:req.params.commentId,userslength:users.length,friends:found.friends,posts:posts,username:found.username,user:found,isLoggedIn:true,userId:req.params.id,add:true,users:users,requests:found.requests})
          })
 
        })
@@ -363,7 +424,23 @@ router.post("/events",(req,res)=>{
 
 
 
+router.post("/:id/senduseremail", async (req,res)=>{
+  await sendUserEmail(req.body.email,req.body.name,req.body.message)
 
+
+  User.findById(req.params.id,(err,user)=>{
+    if(err){
+      console.log(req.params.id);
+      var userId='1234'
+      userId=userId.split().length;
+      res.render("video",{userId:userId,sent:true,name:null,email:null})
+    }else{
+      res.render("video",{userId:req.params.id,sent:true,name:user.username,email:user.email})
+
+    }
+  })
+
+})
 
 
 
@@ -872,12 +949,14 @@ if(post.laughed){
 
 
 
+var score=''
 
 
-router.post("/:id",multer(multerConf).single('photo'),(req,res)=>{
+router.post("/:id",multer(multerConf).single('photo'), (req,res)=>{
 // if(){
+
 var createdBy=null;
-User.findById(req.params.id,(err,found)=>{
+User.findById(req.params.id, async (err,found)=>{
 if(err){
   console.log(err);
   res.redirect("/" +req.params.id)
@@ -896,17 +975,48 @@ if(req.file){
   pic=null
 }
      {
-      Post.create({description:req.body.description,image:pic,authorId:author.id,author:author,postIcon:found.photo,createdBy:createdBy},(err,post)=>{
-        if(err){
-          console.log(err);
-        }else{
-          post.save();
-          User.findByIdAndUpdate(id,{postCount:found.postCount+1},(err,update)=>{
-        })
-          res.redirect("/"+id)
-}
 
-})}
+
+
+
+       console.log("Azure Sentiment Analysis Score");
+  let documents={
+  'documents': [
+    { 'id': req.params.id, 'language': 'en',
+     'text': req.body.description }
+  ]}
+
+  axios({
+    method: 'post',
+    url:'https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.1/sentiment?showStats=false',
+    data: JSON.stringify(documents),
+    headers: {
+      "Content-Type": "application/json",
+
+        'Ocp-Apim-Subscription-Key': subscription_key,
+    }
+  })
+  .then(data=>{
+  console.log(data.data.documents[0].score);
+  score=(data.data.documents[0].score)
+  var width=100-100*score
+
+        Post.create({description:req.body.description,score:score,width:width,image:pic,authorId:author.id,author:author,postIcon:found.photo,createdBy:createdBy},(err,post)=>{
+          if(err){
+            console.log(err);
+          }else{
+            post.save();
+            User.findByIdAndUpdate(id,{postCount:found.postCount+1},(err,update)=>{
+          })
+            res.redirect("/"+id)
+  }
+
+  })
+  });
+
+
+
+}
 
 
 }
